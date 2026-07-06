@@ -64,7 +64,7 @@ export default function Footer() {
       <div className="container footer__bottom">
         <span>© {new Date().getFullYear()} STELAIR. Tous droits reserves.</span>
         {/* Lien discret vers l'espace d'administration : un simple point, sans texte visible */}
-        <Link to={`/${import.meta.env.VITE_ADMIN_PATH || "backstage"}/connexion`} className="footer__admin-dot" aria-label="Espace prive" title=" ">
+       <Link to={`/${import.meta.env.VITE_ADMIN_PATH.replace(/^\/+/, '')}/connexion`}>
           •
         </Link>
       </div>
