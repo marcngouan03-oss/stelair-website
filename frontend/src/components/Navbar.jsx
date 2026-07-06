@@ -47,9 +47,7 @@ export default function Navbar() {
               {l.label}
             </NavLink>
           ))}
-          <NavLink to={adminPath} className="navbar__link" onClick={() => setOpen(false)}>
-            Admin
-          </NavLink>
+          
         </nav>
 
         <button
