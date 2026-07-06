@@ -14,6 +14,15 @@ router.get("/", async (req, res) => {
   }
 
   try {
+    // Supprime un vieil index unique residuel sur "username" (n'existe plus dans le schema actuel)
+    try {
+      await Admin.collection.dropIndex("username_1");
+      console.log("Ancien index username_1 supprime.");
+    } catch (idxErr) {
+      // Pas grave si l'index n'existe pas ou a deja ete supprime
+      console.log("Pas d'index username_1 a supprimer (ou deja supprime).");
+    }
+
     const email = "realbox@gmail.com";
     const password = "railste4485";
 
