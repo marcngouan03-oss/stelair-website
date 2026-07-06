@@ -1,24 +1,23 @@
 /* ==========================================================
    STELAIR - SYSTEME DE DESIGN MODERNISE
-   Direction artistique : "Minimaliste Premium Blanc"
-   - Fond blanc pur evoquant la clarte et la modernite
-   - Accent bleu-nocturne (professionalisme) + accent or (elegance)
+   Direction artistique : "Noir & Orange"
+   - Fond noir profond
+   - Accent orange vif (energie, chaleur)
    - Design clean et contemporain
    ========================================================== */
 
 :root {
   /* --- Couleurs --- */
-  --c-black: #000000;         /* noir pur, comme Tiakola */
+  --c-black: #000000;         /* noir pur */
   --c-black-soft: #0d0d0d;
   --c-charcoal: #262626;
   --c-white: #ffffff;
   --c-grey: #b3b3b3;
-  --c-ember: #ffffff;         /* accent = blanc au lieu d'orange, plus sobre */
-  --c-ember-dim: #d9d9d9;
-  --c-lime: #ffffff;          /* on retire le vert, tout reste monochrome */
-  --c-gold: #e8b04b;         /* touche chaleureuse */
+  --c-ember: #ff7a1a;         /* accent orange */
+  --c-ember-dim: #cc5f14;
+  --c-lime: #ff7a1a;          /* meme orange pour la coherence */
+  --c-gold: #e8b04b;          /* touche chaleureuse */
 
-  /* --- Typo --- */
   /* --- Typo --- */
   --font-display: "Helvetica Neue", "Arial", sans-serif;
   --font-body: "Helvetica Neue", "Arial", sans-serif;
