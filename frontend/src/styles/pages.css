@@ -1,0 +1,456 @@
+.section--alt {
+  background: var(--c-black-soft);
+}
+
+/* ---------- BIO TEASER (home) ---------- */
+.bio-teaser {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.bio-teaser__image img,
+.bio-teaser__placeholder {
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  background: linear-gradient(160deg, var(--c-charcoal), #f0f0f0);
+}
+
+@media (max-width: 860px) {
+  .bio-teaser {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- BIOGRAPHY PAGE ---------- */
+.bio-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.bio-grid__image img,
+.bio-grid__image .bio-teaser__placeholder {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  aspect-ratio: 4/5;
+  position: sticky;
+  top: 120px;
+}
+
+.bio-grid__identity {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--c-ember);
+  margin-bottom: 24px;
+  letter-spacing: 0.02em;
+}
+
+.bio-grid__paragraph {
+  color: var(--c-grey);
+  line-height: 1.75;
+  margin-bottom: 18px;
+  font-size: 1rem;
+}
+
+@media (max-width: 860px) {
+  .bio-grid {
+    grid-template-columns: 1fr;
+  }
+  .bio-grid__image img,
+  .bio-grid__image .bio-teaser__placeholder {
+    position: static;
+  }
+}
+
+/* ---------- MUSIC QUOTE SECTION ---------- */
+.music-quote {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  line-height: 1.15;
+  max-width: 900px;
+  margin: 20px 0 50px;
+  color: var(--c-lime);
+}
+
+.music-quote-section__grid {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.bio-grid__image--secondary img,
+.bio-grid__image--secondary .bio-teaser__placeholder {
+  position: static;
+  aspect-ratio: 1/1;
+}
+
+@media (max-width: 860px) {
+  .music-quote-section__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- FILTER BAR (music page) ---------- */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--c-charcoal);
+  background: transparent;
+  color: var(--c-grey);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover {
+  color: var(--c-white);
+  border-color: var(--c-ember);
+}
+
+.filter-chip--active {
+  background: var(--c-ember);
+  border-color: var(--c-ember);
+  color: var(--c-black);
+}
+
+/* ---------- CONTACT PAGE ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.contact-agents {
+  background: var(--c-black-soft);
+  border: 1px solid var(--c-charcoal);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+
+.contact-agents h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  margin: 8px 0 24px;
+}
+
+.agent-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-top: 1px solid var(--c-charcoal);
+}
+
+.agent-card:first-of-type {
+  border-top: none;
+}
+
+.agent-card__photo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.agent-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.agent-card strong {
+  font-size: 1rem;
+}
+
+.agent-card__role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--c-ember);
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.agent-card__email,
+.agent-card__phone {
+  color: var(--c-grey);
+  font-size: 0.88rem;
+}
+
+.agent-card__email:hover {
+  color: var(--c-lime);
+}
+
+@media (max-width: 960px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- NEW BIOGRAPHY SECTIONS ---------- */
+
+/* Intro section */
+.bio-intro {
+  padding: 60px 0 80px;
+}
+
+.bio-intro__content {
+  max-width: 900px;
+}
+
+.bio-intro__meta {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--c-ember);
+  letter-spacing: 0.05em;
+  margin-top: 12px;
+}
+
+/* Sections de biographie */
+.bio-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.bio-section__image {
+  position: relative;
+}
+
+.bio-section__image img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  aspect-ratio: 4/5;
+  box-shadow: var(--shadow-soft);
+}
+
+.bio-section__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bio-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  line-height: 1.1;
+  margin: 0;
+  color: var(--c-white);
+  font-weight: 600;
+}
+
+.bio-section__subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--c-ember);
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.bio-section__text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bio-section__text p,
+.bio-section__content,
+.bio-teaser__text,
+.bio-intro__content {
+  color: var(--c-white);
+}
+
+.bio-section__image img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  aspect-ratio: 4/5;
+  box-shadow: var(--shadow-soft);
+}
+
+@media (max-width: 960px) {
+  .bio-section__image img {
+    object-fit: contain;
+    aspect-ratio: auto;
+    max-height: 450px;
+    max-width: 100%;
+  }
+}
+
+.bio-section__spotify {
+  margin-top: 20px;
+}
+
+@media (max-width: 960px) {
+  .bio-section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .bio-section__image {
+    order: -1;
+  }
+
+  .bio-section__image img {
+    aspect-ratio: 16/9;
+  }
+}
+
+/* Overrides pour garantir fond blanc et textes sombres sur la page Biographie */
+.bio-intro,
+.bio-section,
+.bio-section__content {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+.bio-section__subtitle {
+  color: #666666; /* subtitre neutre (gris) plutôt que bleu) */
+}
+
+.bio-section__image .bio-teaser__placeholder,
+.bio-teaser__placeholder {
+  background: #ffffff;
+}
+.bio-intro-image {
+  margin-top: 40px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-height: 520px;
+}
+
+.bio-intro-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-height: 520px;
+}
+
+.bio-block {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.bio-block--reverse {
+  grid-template-columns: 0.9fr 1.1fr;
+}
+
+.bio-block--reverse .bio-block__text {
+  order: 2;
+}
+
+.bio-block--reverse .bio-block__image {
+  order: 1;
+}
+
+.bio-block__image img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  aspect-ratio: 4/5;
+}
+
+.bio-block__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.bio-stat-badge {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--c-ember);
+  color: var(--c-ember);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bio-stat-badge--gold {
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+}
+
+.bio-block__embed {
+  margin-top: 20px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+@media (max-width: 860px) {
+  .bio-block,
+  .bio-block--reverse {
+    grid-template-columns: 1fr;
+  }
+  .bio-block--reverse .bio-block__text,
+  .bio-block--reverse .bio-block__image {
+    order: initial;
+  }
+  .bio-block__image {
+    order: -1;
+  }
+}
+.admin-form__block-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  margin: 10px 0 0;
+  color: var(--c-ember);
+}
+
+.admin-form__divider {
+  border: none;
+  border-top: 1px solid var(--c-charcoal);
+  margin: 20px 0;
+}
+
+.admin-form__hint {
+  color: var(--c-grey);
+  font-size: 0.85rem;
+  margin: -10px 0 10px;
+  line-height: 1.5;
+}
+
+.admin-section-block {
+  border: 1px solid var(--c-charcoal);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--c-black);
+}
+
+.admin-section-block__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}

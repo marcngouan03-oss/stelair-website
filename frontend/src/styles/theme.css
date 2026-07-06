@@ -1,0 +1,236 @@
+/* ==========================================================
+   STELAIR - SYSTEME DE DESIGN MODERNISE
+   Direction artistique : "Minimaliste Premium Blanc"
+   - Fond blanc pur evoquant la clarte et la modernite
+   - Accent bleu-nocturne (professionalisme) + accent or (elegance)
+   - Design clean et contemporain
+   ========================================================== */
+
+:root {
+  /* --- Couleurs --- */
+  --c-black: #000000;         /* noir pur, comme Tiakola */
+  --c-black-soft: #0d0d0d;
+  --c-charcoal: #262626;
+  --c-white: #ffffff;
+  --c-grey: #b3b3b3;
+  --c-ember: #ffffff;         /* accent = blanc au lieu d'orange, plus sobre */
+  --c-ember-dim: #d9d9d9;
+  --c-lime: #ffffff;          /* on retire le vert, tout reste monochrome */
+  --c-gold: #e8b04b;         /* touche chaleureuse */
+
+  /* --- Typo --- */
+  /* --- Typo --- */
+  --font-display: "Helvetica Neue", "Arial", sans-serif;
+  --font-body: "Helvetica Neue", "Arial", sans-serif;
+  --font-mono: "Arial", sans-serif;
+
+  /* --- Rythme / espace --- */
+  --container-max: 1280px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 22px;
+
+  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--c-black);
+  color: var(--c-white);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--c-ember);
+  color: var(--c-black);
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-lime);
+  outline-offset: 3px;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--c-ember);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: var(--c-ember);
+  display: inline-block;
+}
+
+.section {
+  padding: 96px 0;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+}
+
+.section-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  line-height: 0.95;
+  margin: 10px 0 20px;
+  letter-spacing: 0.01em;
+}
+
+.section-lede {
+  color: var(--c-grey);
+  max-width: 620px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid transparent;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--c-ember);
+  color: var(--c-black);
+}
+
+.btn-primary:hover {
+  background: var(--c-lime);
+}
+
+.btn-outline {
+  border-color: var(--c-white);
+  color: var(--c-white);
+}
+
+.btn-outline:hover {
+  border-color: var(--c-lime);
+  color: var(--c-lime);
+}
+
+/* --- Motif signature : egaliseur audio --- */
+.eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+}
+
+.eq span {
+  width: 3px;
+  background: currentColor;
+  animation: eq-bounce 1s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+.eq span:nth-child(1) { height: 40%; animation-delay: -0.9s; }
+.eq span:nth-child(2) { height: 100%; animation-delay: -0.6s; }
+.eq span:nth-child(3) { height: 60%; animation-delay: -0.3s; }
+.eq span:nth-child(4) { height: 80%; animation-delay: -0.1s; }
+
+@keyframes eq-bounce {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+.grain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.loading-screen {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-grey);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+}
+
+.empty-state {
+  border: 1px dashed var(--c-charcoal);
+  border-radius: var(--radius-md);
+  padding: 40px;
+  text-align: center;
+  color: var(--c-grey);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
