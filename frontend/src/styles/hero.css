@@ -49,6 +49,48 @@
   padding-bottom: 120px;
 }
 
+/* ---------- RESEAUX SOCIAUX (au-dessus du titre, home uniquement) ---------- */
+.hero__socials {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.hero__social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.hero__social-btn:hover {
+  transform: translateY(-3px);
+  border-color: var(--c-ember);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.hero__social-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__social-fallback {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--c-white);
+}
+
 .hero__title {
   font-family: var(--font-display);
   text-transform: uppercase;
@@ -117,5 +159,12 @@
   .hero__scroll-cue,
   .hero__dots {
     display: none;
+  }
+  .hero__social-btn {
+    width: 38px;
+    height: 38px;
+  }
+  .hero__socials {
+    gap: 12px;
   }
 }

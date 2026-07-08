@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import api from "../api/api";
 import "../styles/hero.css";
 
+const HOME_SOCIAL_ORDER = ["whatsapp", "instagram", "tiktok", "facebook", "snapchat"];
+
 // Hero plein ecran reutilisable sur chaque page (home, music, videos, biography, contact).
 // Si plusieurs heros sont actifs pour la meme page, ils tournent en carousel automatique.
 export default function HeroSection({ page, fallbackTitle, fallbackSubtitle }) {
   const [slides, setSlides] = useState([]);
   const [index, setIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [socials, setSocials] = useState([]);
 
   useEffect(() => {
     api
@@ -18,16 +21,51 @@ export default function HeroSection({ page, fallbackTitle, fallbackSubtitle }) {
   }, [page]);
 
   useEffect(() => {
+    if (page !== "home") return;
+    api
+      .get("/socials")
+      .then((res) => setSocials(res.data))
+      .catch(() => setSocials([]));
+  }, [page]);
+
+  useEffect(() => {
     if (slides.length < 2) return;
     const t = setInterval(() => setIndex((i) => (i + 1) % slides.length), 6500);
     return () => clearInterval(t);
   }, [slides]);
+
+  const orderedSocials = HOME_SOCIAL_ORDER.map((platform) =>
+    socials.find((s) => s.platform === platform)
+  ).filter(Boolean);
+
+  const socialRow =
+    page === "home" && orderedSocials.length > 0 ? (
+      <div className="hero__socials">
+        {orderedSocials.map((s) => (
+          <a
+            key={s.platform}
+            href={s.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero__social-btn"
+            aria-label={s.platform}
+          >
+            {s.image ? (
+              <img src={s.image} alt={s.platform} />
+            ) : (
+              <span className="hero__social-fallback">{s.platform[0].toUpperCase()}</span>
+            )}
+          </a>
+        ))}
+      </div>
+    ) : null;
 
   if (loaded && slides.length === 0) {
     return (
       <section className="hero hero--fallback">
         <div className="hero__gradient" />
         <div className="container hero__content">
+          {socialRow}
           <span className="eyebrow">STELAIR</span>
           <h1 className="hero__title">{fallbackTitle}</h1>
           {fallbackSubtitle && <p className="hero__subtitle">{fallbackSubtitle}</p>}
@@ -52,6 +90,7 @@ export default function HeroSection({ page, fallbackTitle, fallbackSubtitle }) {
       <div className="hero__gradient" />
 
       <div className="container hero__content">
+        {socialRow}
         <span className="eyebrow">STELAIR</span>
         {slide && (
           <>

@@ -92,7 +92,7 @@ export default function AdminBio() {
       </h2>
 
       <form className="admin-form" onSubmit={handleSave} style={{ maxWidth: 780 }}>
-        <h3 className="admin-form__block-title">En-tete de la page</h3>
+        <h3 className="admin-form__block-title">En-tete de la page (Qui est STELAIR)</h3>
 
         <div className="form-field">
           <label>Titre principal de la page</label>
@@ -162,16 +162,6 @@ export default function AdminBio() {
             value={bio.birthPlace || ""}
             onChange={function (e) {
               handleChange("birthPlace", e.target.value);
-            }}
-          />
-        </div>
-
-        <div className="form-field">
-          <label>Citation mise en avant</label>
-          <input
-            value={bio.musicQuote || ""}
-            onChange={function (e) {
-              handleChange("musicQuote", e.target.value);
             }}
           />
         </div>
@@ -301,6 +291,19 @@ export default function AdminBio() {
         <button type="button" className="btn btn-outline" onClick={addSection}>
           + Ajouter un bloc de biographie
         </button>
+
+        <hr className="admin-form__divider" />
+        <h3 className="admin-form__block-title">Ma musique (citation de fin de page)</h3>
+
+        <div className="form-field">
+          <label>Citation mise en avant</label>
+          <input
+            value={bio.musicQuote || ""}
+            onChange={function (e) {
+              handleChange("musicQuote", e.target.value);
+            }}
+          />
+        </div>
 
         {message && <p style={{ color: "var(--c-lime)", fontSize: "0.88rem" }}>{message}</p>}
 

@@ -6,6 +6,7 @@ const fieldsConfig = [
     label: "Reseau",
     type: "select",
     options: [
+      { value: "whatsapp", label: "WhatsApp" },
       { value: "instagram", label: "Instagram" },
       { value: "facebook", label: "Facebook" },
       { value: "tiktok", label: "TikTok" },
@@ -17,6 +18,7 @@ const fieldsConfig = [
   },
   { name: "label", label: "Nom affiche (optionnel)", type: "text" },
   { name: "url", label: "Lien du profil", type: "url" },
+  { name: "image", label: "Logo (image)", type: "image" },
   { name: "order", label: "Ordre d'affichage", type: "number" },
   { name: "isActive", label: "Actif sur le site", type: "checkbox" },
 ];
@@ -28,7 +30,7 @@ export default function AdminSocials() {
       title="Reseaux sociaux"
       fieldsConfig={fieldsConfig}
       displayField="platform"
-      emptyDefaults={{ platform: "instagram", order: 0, isActive: true }}
+      emptyDefaults={{ platform: "whatsapp", order: 0, isActive: true }}
     />
   );
 }

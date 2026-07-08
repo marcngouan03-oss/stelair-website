@@ -18,9 +18,6 @@ export default function Footer() {
       <div className="container footer__inner">
         <div className="footer__brand">
           <div className="footer__logo">STELAIR</div>
-          <p className="footer__tagline">
-            Les langues mentent, seule l&apos;action dit la verite.
-          </p>
         </div>
 
         <div className="footer__col">

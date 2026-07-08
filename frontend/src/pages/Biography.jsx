@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
-import HeroSection from "../components/HeroSection";
-import { getSpotifyEmbedUrl } from "../utils/embedHelpers";
 import "../styles/pages.css";
 
 export default function Biography() {
@@ -18,12 +16,9 @@ export default function Biography() {
 
   if (!bio) {
     return (
-      <>
-        <HeroSection page="biography" fallbackTitle="Biographie" fallbackSubtitle="A propos de STELAIR" />
-        <div className="section container">
-          <div className="loading-screen">Chargement...</div>
-        </div>
-      </>
+      <div className="section container">
+        <div className="loading-screen">Chargement...</div>
+      </div>
     );
   }
 
@@ -31,15 +26,17 @@ export default function Biography() {
 
   return (
     <>
-      <HeroSection page="biography" fallbackTitle="Biographie" fallbackSubtitle="A propos de STELAIR" />
-
-      <section className="section">
+      <section className="section" style={{ paddingTop: 140 }}>
         <div className="container">
           <span className="eyebrow">Qui est STELAIR</span>
-          <h1 className="section-title">{bio.pageTitle}</h1>
-          <p className="section-lede" style={{ maxWidth: 720 }}>
-            {bio.pageSubtitle}
-          </p>
+          <h1 className="section-title">
+            {bio.pageTitle || "STELAIR : biographie, parcours et actualites"}
+          </h1>
+          {bio.pageSubtitle && (
+            <p className="section-lede" style={{ maxWidth: 720 }}>
+              {bio.pageSubtitle}
+            </p>
+          )}
 
           {bio.introText && (
             <p className="bio-grid__paragraph" style={{ maxWidth: 780, marginTop: 24 }}>
@@ -48,7 +45,7 @@ export default function Biography() {
           )}
 
           <p className="bio-grid__identity" style={{ marginTop: 20 }}>
-            {bio.realName} — Ne le {bio.birthDate} a {bio.birthPlace}
+            {bio.realName}  {bio.birthDate} {bio.birthPlace}
           </p>
 
           {bio.introImage && (
@@ -59,17 +56,7 @@ export default function Biography() {
         </div>
       </section>
 
-      {bio.musicQuote && (
-        <section className="section section--alt music-quote-section">
-          <div className="container">
-            <span className="eyebrow">Ma musique</span>
-            <blockquote className="music-quote">« {bio.musicQuote} »</blockquote>
-          </div>
-        </section>
-      )}
-
       {sections.map(function (s, i) {
-        const embedUrl = s.spotifyUrl ? getSpotifyEmbedUrl(s.spotifyUrl) : null;
         const imageOnLeft = s.imagePosition === "left";
         const sectionClass = i % 2 === 0 ? "section" : "section section--alt";
         const blockClass = imageOnLeft ? "bio-block bio-block--reverse" : "bio-block";
@@ -94,20 +81,6 @@ export default function Biography() {
                       )}
                     </div>
                   )}
-
-                  {embedUrl && (
-                    <div className="bio-block__embed">
-                      <iframe
-                        src={embedUrl}
-                        title={s.title || "STELAIR"}
-                        width="100%"
-                        height="152"
-                        frameBorder="0"
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
                 </div>
 
                 {s.image && (
@@ -120,6 +93,15 @@ export default function Biography() {
           </section>
         );
       })}
+
+      {bio.musicQuote && (
+        <section className="section section--alt music-quote-section">
+          <div className="container">
+            <span className="eyebrow">Ma musique</span>
+            <blockquote className="music-quote">« {bio.musicQuote} »</blockquote>
+          </div>
+        </section>
+      )}
     </>
   );
 }
