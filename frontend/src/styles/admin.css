@@ -70,6 +70,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
+  gap: 12px;
 }
 
 .admin-panel__header h2 {
@@ -93,6 +94,7 @@
   border: 1px solid var(--c-charcoal);
   border-radius: var(--radius-sm);
   padding: 14px 18px;
+  gap: 12px;
 }
 
 .admin-list__row--inactive {
@@ -101,12 +103,14 @@
 
 .admin-list__title {
   font-weight: 600;
+  word-break: break-word;
 }
 
 .admin-list__actions {
   display: flex;
   gap: 8px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .btn-sm {
@@ -145,6 +149,7 @@
   display: flex;
   gap: 12px;
   margin-top: 10px;
+  flex-wrap: wrap;
 }
 
 .form-field--checkbox label {
@@ -161,6 +166,18 @@
 
 .form-field--checkbox input {
   width: auto;
+}
+
+/* Champs de saisie : taille de police 16px minimum sur mobile pour eviter
+   que Safari/Chrome zoome automatiquement au tap dans un champ */
+.admin-form input,
+.admin-form select,
+.admin-form textarea,
+.admin-login__box input,
+.admin-login__box select,
+.admin-login__box textarea {
+  font-size: 16px;
+  width: 100%;
 }
 
 /* ---------- MEDIA UPLOADER ---------- */
@@ -211,6 +228,7 @@
   align-items: center;
   justify-content: center;
   background: var(--c-black);
+  padding: 20px;
 }
 
 .admin-login__box {
@@ -268,6 +286,9 @@
   font-size: 0.88rem;
 }
 
+/* ==========================================================
+   RESPONSIVE - TABLETTES ET GRANDS TELEPHONES
+   ========================================================== */
 @media (max-width: 900px) {
   .admin-shell {
     flex-direction: column;
@@ -277,14 +298,127 @@
     flex-direction: row;
     overflow-x: auto;
     padding: 14px;
+    gap: 4px;
+    -webkit-overflow-scrolling: touch;
   }
   .admin-sidebar__logo {
     display: none;
+  }
+  .admin-sidebar a,
+  .admin-sidebar button {
+    width: auto;
+    white-space: nowrap;
+    padding: 10px 14px;
+  }
+  .admin-sidebar__logout {
+    margin-top: 0;
+    border-top: none;
+    padding-top: 10px !important;
   }
   .admin-main {
     padding: 24px;
   }
   .dashboard-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE - TELEPHONES (portrait, petits ecrans)
+   ========================================================== */
+@media (max-width: 600px) {
+  .admin-main {
+    padding: 16px;
+  }
+
+  .admin-panel__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .admin-panel__header .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .admin-panel__header h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Chaque ligne de la liste passe en colonne : titre en haut, actions en dessous */
+  .admin-list__row {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px;
+  }
+
+  .admin-list__title {
+    font-size: 0.95rem;
+  }
+
+  .admin-list__actions {
+    justify-content: flex-start;
+  }
+
+  .admin-list__actions .btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px 8px;
+  }
+
+  /* Formulaires : moins de marge, boutons empiles */
+  .admin-form {
+    padding: 20px;
+    gap: 14px;
+    border-radius: var(--radius-sm);
+  }
+
+  .admin-form__actions {
+    flex-direction: column;
+  }
+
+  .admin-form__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .collab-form__row {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* Blocs de sections (biographie, etc.) plus compacts */
+  .admin-section-block {
+    padding: 14px;
+  }
+
+  .admin-section-block__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .admin-section-block__header div {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* Login centre et bien dimensionne sur petit ecran */
+  .admin-login__box {
+    padding: 28px 22px;
+  }
+
+  .admin-login__box h1 {
+    font-size: 1.5rem;
+    margin: 6px 0 22px;
+  }
+
+  .media-uploader__preview {
+    max-width: 100%;
+  }
+
+  .dashboard-card {
+    padding: 20px;
   }
 }
