@@ -31,7 +31,7 @@ export default function Videos() {
               Aucune video a afficher pour le moment.
             </div>
           )}
-        </div>
+        </div>   
       </section>
     </>
   );
