@@ -8,6 +8,7 @@ const links = [
   { to: "/musique", label: "Musique" },
   { to: "/videos", label: "Videos" },
   { to: "/contact", label: "Contact" },
+  { to: "/smackbeat", label: "SmackBeat" },
 ];
 
 const adminPath = `/${import.meta.env.VITE_ADMIN_PATH || "backstage"}/connexion`;

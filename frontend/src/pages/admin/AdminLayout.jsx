@@ -14,6 +14,8 @@ const links = [
   { to: "/plateformes", label: "Plateformes streaming" },
   { to: "/agents", label: "Agents / Contacts" },
   { to: "/demandes", label: "Demandes de collab" },
+  { to: "/smackbeat", label: "SmackBeat" },
+  { to: "/smackbeat-gagnants", label: "SmackBeat — Gagnants" },
 ];
 
 export default function AdminLayout() {
