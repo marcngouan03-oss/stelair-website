@@ -32,6 +32,7 @@
 .navbar__links {
   display: flex;
   gap: 34px;
+  align-items: center;
 }
 
 .navbar__link {
@@ -64,6 +65,21 @@
 .navbar__link:hover::after,
 .navbar__link--active::after {
   width: 100%;
+}
+
+/* Lien special SmackBeat : uniquement la couleur change, meme police que les autres */
+.navbar__link--smackbeat {
+  color: var(--c-gold);
+}
+
+.navbar__link--smackbeat::after {
+  background: var(--c-gold);
+}
+
+.navbar__link--smackbeat:hover,
+.navbar__link--smackbeat.navbar__link--active {
+  color: var(--c-gold);
+  opacity: 0.8;
 }
 
 .navbar__burger {
@@ -200,14 +216,38 @@
 
 .footer__bottom {
   margin-top: 60px;
-  padding-top: 20px;
+  padding-top: 34px;
   border-top: 1px solid var(--c-charcoal);
-  color: var(--c-charcoal);
+  color: var(--c-grey);
   font-size: 0.78rem;
   font-family: var(--font-mono);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer__copyright {
+  flex-shrink: 0;
+}
+
+.footer__credit {
+  color: var(--c-grey);
+  opacity: 0.85;
+  flex: 1;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .footer__bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  .footer__credit {
+    order: 2;
+  }
 }
 
 /* Lien discret vers l'administration : un point presque invisible, agrandi seulement au survol */

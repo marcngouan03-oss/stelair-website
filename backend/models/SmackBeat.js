@@ -1,19 +1,35 @@
 const mongoose = require("mongoose");
 
+const studioSchema = new mongoose.Schema(
+  {
+    name: { type: String, default: "" },
+    contact: { type: String, default: "" },
+  },
+  { _id: false }
+);
+
 const smackBeatSchema = new mongoose.Schema(
   {
     key: { type: String, default: "main", unique: true },
 
-    rulesText: { type: String, default: "" }, // texte des regles du challenge
-    prizeText: { type: String, default: "" }, // texte des prix a gagner (change chaque mois)
+    tagline: { type: String, default: "fait le challenge et remporte des prix" },
 
-    instrumentalUrl: { type: String, default: "" }, // fichier audio Cloudinary
+    conceptImage: { type: String, default: "" },
+    conceptImagePublicId: { type: String, default: "" },
+
+    instrumentalUrl: { type: String, default: "" },
     instrumentalPublicId: { type: String, default: "" },
 
-    studioName: { type: String, default: "Studio Agri" },
-    studioPhone: { type: String, default: "" }, // numero cliquable (tel:)
+    reprisesGoal: { type: Number, default: 4000 },
+
+    studios: { type: [studioSchema], default: [] },
+
+    prizeAmount: { type: String, default: "200 000" },
+    clipCredit: { type: String, default: "un clip produit par KUMA.group" },
 
     tiktokInstructions: { type: String, default: "" },
+    rulesText: { type: String, default: "" },
+    prizeText: { type: String, default: "" },
   },
   { timestamps: true }
 );

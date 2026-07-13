@@ -1,456 +1,482 @@
-.section--alt {
-  background: var(--c-black-soft);
+/* ==========================================================
+   SMART BITLOCK (page /smackbeat)
+   ========================================================== */
+
+@keyframes smackbeat-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* ---------- BIO TEASER (home) ---------- */
-.bio-teaser {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 60px;
-  align-items: center;
-}
-
-.bio-teaser__image img,
-.bio-teaser__placeholder {
-  width: 100%;
-  aspect-ratio: 4/5;
-  border-radius: var(--radius-lg);
-  object-fit: cover;
-  background: linear-gradient(160deg, var(--c-charcoal), #f0f0f0);
-}
-
-@media (max-width: 860px) {
-  .bio-teaser {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---------- BIOGRAPHY PAGE ---------- */
-.bio-grid {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 60px;
-  align-items: start;
-}
-
-.bio-grid__image img,
-.bio-grid__image .bio-teaser__placeholder {
-  width: 100%;
-  border-radius: var(--radius-lg);
-  object-fit: cover;
-  aspect-ratio: 4/5;
-  position: sticky;
-  top: 120px;
-}
-
-.bio-grid__identity {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--c-ember);
-  margin-bottom: 24px;
-  letter-spacing: 0.02em;
-}
-
-.bio-grid__paragraph {
-  color: var(--c-grey);
-  line-height: 1.75;
-  margin-bottom: 18px;
-  font-size: 1rem;
-}
-
-@media (max-width: 860px) {
-  .bio-grid {
-    grid-template-columns: 1fr;
-  }
-  .bio-grid__image img,
-  .bio-grid__image .bio-teaser__placeholder {
-    position: static;
-  }
-}
-
-/* ---------- MUSIC QUOTE SECTION ---------- */
-.music-quote {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: clamp(1.6rem, 4vw, 3rem);
-  line-height: 1.15;
-  max-width: 900px;
-  margin: 20px 0 50px;
-  color: var(--c-lime);
-}
-
-.music-quote-section__grid {
-  display: grid;
-  grid-template-columns: 0.7fr 1.3fr;
-  gap: 50px;
-  align-items: center;
-}
-
-.bio-grid__image--secondary img,
-.bio-grid__image--secondary .bio-teaser__placeholder {
-  position: static;
-  aspect-ratio: 1/1;
-}
-
-@media (max-width: 860px) {
-  .music-quote-section__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---------- FILTER BAR (music page) ---------- */
-.filter-bar {
-  display: flex;
-  gap: 12px;
-  margin-top: 40px;
-  flex-wrap: wrap;
-}
-
-.filter-chip {
-  padding: 10px 20px;
-  border-radius: 999px;
-  border: 1px solid var(--c-charcoal);
-  background: transparent;
-  color: var(--c-grey);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  transition: all 0.2s ease;
-}
-
-.filter-chip:hover {
+.smackbeat-page {
+  padding: 140px 0 100px;
+  min-height: 100vh;
   color: var(--c-white);
-  border-color: var(--c-ember);
 }
 
-.filter-chip--active {
-  background: var(--c-ember);
-  border-color: var(--c-ember);
-  color: var(--c-black);
+.smackbeat-topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 60px;
 }
 
-/* ---------- CONTACT PAGE ---------- */
-.contact-grid {
+.smackbeat-topbar__tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+  color: var(--c-white);
+  max-width: 460px;
+  text-align: right;
+  line-height: 1.3;
+  position: relative;
+  padding-top: 18px;
+  animation: smackbeat-fade-up 0.6s ease both;
+}
+
+.smackbeat-topbar__tagline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--c-gold);
+}
+
+.smackbeat-columns {
   display: grid;
-  grid-template-columns: 1.4fr 0.9fr;
+  grid-template-columns: 1.2fr 0.8fr;
   gap: 60px;
   align-items: start;
 }
 
-.contact-agents {
+.smackbeat-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  color: var(--c-gold);
+  margin: 0 0 20px;
+  line-height: 1;
+  animation: smackbeat-fade-up 0.6s ease both;
+}
+
+.smackbeat-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: smackbeat-fade-up 0.7s ease both;
+  animation-delay: 0.1s;
+}
+
+.smackbeat-list li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--c-white);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.smackbeat-list li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  color: var(--c-gold);
+}
+
+.smackbeat-list__link {
+  color: var(--c-gold);
+  text-decoration: underline;
+}
+
+.smackbeat-columns__image img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  aspect-ratio: 4/5;
+  animation: smackbeat-fade-up 0.7s ease both;
+  animation-delay: 0.15s;
+}
+
+@media (max-width: 860px) {
+  .smackbeat-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- MOIS EN COURS ---------- */
+.smackbeat-current-month {
+  margin-top: 110px;
+  text-align: right;
+}
+
+.smackbeat-month-giant {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  color: var(--c-gold);
+  line-height: 0.9;
+  margin: 0 0 20px;
+  animation: smackbeat-fade-up 0.7s ease both;
+}
+
+.smackbeat-winner-announce {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+  color: var(--c-gold);
+  max-width: 900px;
+  margin: 0 0 40px auto;
+  line-height: 1.4;
+  animation: smackbeat-fade-up 0.7s ease both;
+  animation-delay: 0.1s;
+}
+
+.smackbeat-winner-announce a {
+  color: var(--c-gold);
+  text-decoration: underline;
+}
+
+.smackbeat-podium {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  animation: smackbeat-fade-up 0.7s ease both;
+  animation-delay: 0.2s;
+}
+
+.smackbeat-podium__card {
   background: var(--c-black-soft);
   border: 1px solid var(--c-charcoal);
-  border-radius: var(--radius-lg);
-  padding: 32px;
-}
-
-.contact-agents h3 {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: 1.4rem;
-  margin: 8px 0 24px;
-}
-
-.agent-card {
+  border-radius: var(--radius-md);
+  padding: 20px;
+  width: 180px;
+  text-align: left;
   display: flex;
-  gap: 14px;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.smackbeat-podium__image img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.smackbeat-podium__card a {
+  color: var(--c-gold);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 860px) {
+  .smackbeat-current-month,
+  .smackbeat-winner-announce,
+  .smackbeat-podium {
+    text-align: left;
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+}
+
+/* ---------- HISTORIQUE / TIMELINE ---------- */
+.smackbeat-timeline {
+  margin-top: 90px;
+}
+
+.smackbeat-timeline__row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 20px 0 10px;
+  margin-top: 16px;
+  scrollbar-width: thin;
+}
+
+.smackbeat-timeline__item {
+  flex-shrink: 0;
+  background: var(--c-black-soft);
+  border: 1px solid var(--c-charcoal);
+  border-radius: var(--radius-md);
+  padding: 16px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 160px;
+}
+
+.smackbeat-timeline__month {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--c-gold);
+}
+
+.smackbeat-timeline__winner {
+  font-size: 0.95rem;
+  color: var(--c-white);
+}
+
+/* ---------- SmackBeat steps (utilise sur ancienne mise en page, conserve pour compatibilite) ---------- */
+.smackbeat-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.smackbeat-step {
+  display: flex;
+  gap: 20px;
   align-items: flex-start;
-  padding: 16px 0;
-  border-top: 1px solid var(--c-charcoal);
 }
 
-.agent-card:first-of-type {
-  border-top: none;
+.smackbeat-step__number {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--c-gold);
+  flex-shrink: 0;
 }
 
-.agent-card__photo {
-  width: 52px;
-  height: 52px;
+.smackbeat-studios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* ---------- BOUTON FLOTTANT DE TELECHARGEMENT ---------- */
+@keyframes smackbeat-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.smackbeat-float-download {
+  position: fixed;
+  right: 24px;
+  bottom: 30px;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: var(--c-gold);
+  color: var(--c-black);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  animation: smackbeat-float 2.6s ease-in-out infinite;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.smackbeat-float-download:hover {
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5);
+}
+
+.smackbeat-float-download__icon {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+@media (max-width: 600px) {
+  .smackbeat-float-download {
+    right: 16px;
+    bottom: 16px;
+    padding: 12px 16px;
+    font-size: 0.7rem;
+  }
+}
+
+/* ---------- LABEL DE CLASSEMENT SUR LE PODIUM ---------- */
+.smackbeat-podium__rank {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--c-gold);
+  letter-spacing: 0.05em;
+}
+
+/* ---------- CLASSEMENT (remplace l'ancien gros titre du mois) ---------- */
+.smackbeat-ranking {
+  margin-top: 100px;
+}
+
+.smackbeat-ranking__month {
+  margin-top: 40px;
+}
+
+.smackbeat-ranking__month-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--c-gold);
+  margin: 0 0 16px;
+}
+
+.smackbeat-ranking__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.smackbeat-ranking__row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--c-black-soft);
+  border: 1px solid var(--c-charcoal);
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  animation: smackbeat-fade-up 0.5s ease both;
+}
+
+.smackbeat-ranking__rank {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--c-gold);
+  font-size: 0.95rem;
+  width: 42px;
+  flex-shrink: 0;
+}
+
+.smackbeat-ranking__image img {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
 }
 
-.agent-card div {
+.smackbeat-ranking__info {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex: 1;
 }
 
-.agent-card strong {
-  font-size: 1rem;
-}
-
-.agent-card__role {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  color: var(--c-ember);
-  letter-spacing: 0.08em;
-  margin-bottom: 4px;
-}
-
-.agent-card__email,
-.agent-card__phone {
-  color: var(--c-grey);
-  font-size: 0.88rem;
-}
-
-.agent-card__email:hover {
-  color: var(--c-lime);
-}
-
-@media (max-width: 960px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 600px) {
+  .smackbeat-ranking__row {
+    flex-wrap: wrap;
   }
 }
 
-/* ---------- NEW BIOGRAPHY SECTIONS ---------- */
-
-/* Intro section */
-.bio-intro {
-  padding: 60px 0 80px;
-}
-
-.bio-intro__content {
-  max-width: 900px;
-}
-
-.bio-intro__meta {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  color: var(--c-ember);
-  letter-spacing: 0.05em;
-  margin-top: 12px;
-}
-
-/* Sections de biographie */
-.bio-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+/* ---------- BOUTON INLINE "TELECHARGER" dans la liste des conditions ---------- */
+.smackbeat-list__item-with-btn {
+  display: flex;
   align-items: center;
-}
-
-.bio-section__image {
-  position: relative;
-}
-
-.bio-section__image img {
-  width: 100%;
-  border-radius: var(--radius-lg);
-  object-fit: cover;
-  aspect-ratio: 4/5;
-  box-shadow: var(--shadow-soft);
-}
-
-.bio-section__content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.bio-section__title {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
-  line-height: 1.1;
-  margin: 0;
-  color: var(--c-white);
-  font-weight: 600;
-}
-
-.bio-section__subtitle {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  color: var(--c-ember);
-  letter-spacing: 0.05em;
-  margin: 0;
-}
-
-.bio-section__text {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.bio-section__text p,
-.bio-section__content,
-.bio-teaser__text,
-.bio-intro__content {
-  color: var(--c-white);
-}
-
-.bio-section__image img {
-  width: 100%;
-  border-radius: var(--radius-lg);
-  object-fit: cover;
-  aspect-ratio: 4/5;
-  box-shadow: var(--shadow-soft);
-}
-
-@media (max-width: 960px) {
-  .bio-section__image img {
-    object-fit: contain;
-    aspect-ratio: auto;
-    max-height: 450px;
-    max-width: 100%;
-  }
-}
-
-.bio-section__spotify {
-  margin-top: 20px;
-}
-
-@media (max-width: 960px) {
-  .bio-section {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .bio-section__image {
-    order: -1;
-  }
-
-  .bio-section__image img {
-    aspect-ratio: 16/9;
-  }
-}
-
-/* Overrides pour garantir fond blanc et textes sombres sur la page Biographie */
-.bio-intro,
-.bio-section,
-.bio-section__content {
-  background: #ffffff;
-  color: #1a1a1a;
-}
-
-.bio-section__subtitle {
-  color: #666666; /* subtitre neutre (gris) plutôt que bleu) */
-}
-
-.bio-section__image .bio-teaser__placeholder,
-.bio-teaser__placeholder {
-  background: #ffffff;
-}
-.bio-intro-image {
-  margin-top: 40px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  max-height: 520px;
-}
-
-.bio-intro-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  max-height: 520px;
-}
-
-.bio-block {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 60px;
-  align-items: center;
-}
-
-.bio-block--reverse {
-  grid-template-columns: 0.9fr 1.1fr;
-}
-
-.bio-block--reverse .bio-block__text {
-  order: 2;
-}
-
-.bio-block--reverse .bio-block__image {
-  order: 1;
-}
-
-.bio-block__image img {
-  width: 100%;
-  border-radius: var(--radius-lg);
-  object-fit: cover;
-  aspect-ratio: 4/5;
-}
-
-.bio-block__stats {
-  display: flex;
+  gap: 14px;
   flex-wrap: wrap;
-  gap: 10px;
-  margin: 20px 0;
 }
 
-.bio-stat-badge {
-  padding: 8px 16px;
+.smackbeat-inline-btn {
+  padding: 6px 16px;
   border-radius: 999px;
-  border: 1px solid var(--c-ember);
-  color: var(--c-ember);
+  background: var(--c-gold);
+  color: var(--c-black);
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
+  transition: transform 0.2s ease;
 }
 
-.bio-stat-badge--gold {
-  border-color: var(--c-gold);
-  color: var(--c-gold);
+.smackbeat-inline-btn:hover {
+  transform: translateY(-2px);
 }
 
-.bio-block__embed {
-  margin-top: 20px;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-}
-
-@media (max-width: 860px) {
-  .bio-block,
-  .bio-block--reverse {
-    grid-template-columns: 1fr;
-  }
-  .bio-block--reverse .bio-block__text,
-  .bio-block--reverse .bio-block__image {
-    order: initial;
-  }
-  .bio-block__image {
-    order: -1;
-  }
-}
-.admin-form__block-title {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: 1.2rem;
-  margin: 10px 0 0;
-  color: var(--c-ember);
-}
-
-.admin-form__divider {
-  border: none;
-  border-top: 1px solid var(--c-charcoal);
-  margin: 20px 0;
-}
-
-.admin-form__hint {
-  color: var(--c-grey);
-  font-size: 0.85rem;
-  margin: -10px 0 10px;
-  line-height: 1.5;
-}
-
-.admin-section-block {
-  border: 1px solid var(--c-charcoal);
-  border-radius: var(--radius-md);
-  padding: 22px;
+/* ---------- ICONE TIKTOK dans le classement ---------- */
+.smackbeat-ranking__tiktok {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  background: var(--c-black);
-}
-
-.admin-section-block__header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--c-white);
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.smackbeat-ranking__tiktok:hover {
+  background: var(--c-gold);
+  color: var(--c-black);
+}
+
+/* Photo du gagnant : petite, ronde, ne cache jamais le nom (flex layout garanti) */
+.smackbeat-ranking__row {
+  flex-wrap: nowrap;
+}
+
+.smackbeat-ranking__image {
+  flex-shrink: 0;
+}
+
+.smackbeat-ranking__image img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.smackbeat-ranking__info {
+  min-width: 0;
+}
+
+.smackbeat-ranking__info strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .smackbeat-ranking__row {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- REGROUPEMENT IMAGE + NOM (jamais de chevauchement) ---------- */
+.smackbeat-ranking__person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.smackbeat-ranking__row {
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.smackbeat-ranking__row:hover {
+  transform: translateX(4px);
+  border-color: var(--c-gold);
+  background: rgba(232, 176, 75, 0.06);
+}
+
+/* ---------- BIOGRAPHIE : titre plus leger, mise en page plus soignee ---------- */
+.bio-page-title {
+  font-weight: 600 !important;
+  letter-spacing: 0.015em;
+  line-height: 1.05 !important;
+}
+
+.bio-page-subtitle {
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.bio-page-intro {
+  line-height: 1.85 !important;
+  font-size: 1.05rem;
+  color: var(--c-grey);
+  margin-bottom: 30px !important;
 }

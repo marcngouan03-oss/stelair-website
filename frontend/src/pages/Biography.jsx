@@ -29,24 +29,20 @@ export default function Biography() {
       <section className="section" style={{ paddingTop: 140 }}>
         <div className="container">
           <span className="eyebrow">Qui est STELAIR</span>
-          <h1 className="section-title">
+          <h1 className="section-title bio-page-title">
             {bio.pageTitle || "STELAIR : biographie, parcours et actualites"}
           </h1>
           {bio.pageSubtitle && (
-            <p className="section-lede" style={{ maxWidth: 720 }}>
+            <p className="section-lede bio-page-subtitle" style={{ maxWidth: 720 }}>
               {bio.pageSubtitle}
             </p>
           )}
 
           {bio.introText && (
-            <p className="bio-grid__paragraph" style={{ maxWidth: 780, marginTop: 24 }}>
+            <p className="bio-grid__paragraph bio-page-intro" style={{ maxWidth: 780, marginTop: 24 }}>
               {bio.introText}
             </p>
           )}
-
-          <p className="bio-grid__identity" style={{ marginTop: 20 }}>
-            {bio.realName}  {bio.birthDate} {bio.birthPlace}
-          </p>
 
           {bio.introImage && (
             <div className="bio-intro-image">
@@ -67,7 +63,7 @@ export default function Biography() {
               <div className={blockClass}>
                 <div className="bio-block__text">
                   {s.title && (
-                    <h2 className="section-title" style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)" }}>
+                    <h2 className="section-title" style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)", fontWeight: 600 }}>
                       {s.title}
                     </h2>
                   )}

@@ -8,10 +8,9 @@ const links = [
   { to: "/musique", label: "Musique" },
   { to: "/videos", label: "Videos" },
   { to: "/contact", label: "Contact" },
-  { to: "/smackbeat", label: "SmackBeat" },
 ];
 
-const adminPath = `/${import.meta.env.VITE_ADMIN_PATH || "backstage"}/connexion`;
+const smackbeatLink = { to: "/smackbeat", label: "SmackBeat" };
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -48,7 +47,15 @@ export default function Navbar() {
               {l.label}
             </NavLink>
           ))}
-          
+          <NavLink
+            to={smackbeatLink.to}
+            className={({ isActive }) =>
+              `navbar__link navbar__link--smackbeat ${isActive ? "navbar__link--active" : ""}`
+            }
+            onClick={() => setOpen(false)}
+          >
+            {smackbeatLink.label}
+          </NavLink>
         </nav>
 
         <button

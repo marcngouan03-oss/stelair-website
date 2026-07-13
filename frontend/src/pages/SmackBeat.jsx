@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
+import SocialIcon from "../components/SocialIcon";
 import "../styles/pages.css";
 
 export default function SmackBeat() {
@@ -24,128 +25,148 @@ export default function SmackBeat() {
     );
   }
 
-  const phoneDigitsOnly = (data.studioPhone || "").replace(/[^\d+]/g, "");
+  const studios = data.studios || [];
+  const instrumentalReady = !!data.instrumentalUrl;
+
+  const winnersByMonth = {};
+  winners.forEach(function (w) {
+    if (!winnersByMonth[w.month]) winnersByMonth[w.month] = [];
+    winnersByMonth[w.month].push(w);
+  });
+  const months = Object.keys(winnersByMonth).sort().reverse();
+  months.forEach(function (m) {
+    winnersByMonth[m].sort(function (a, b) {
+      return (a.rank || 1) - (b.rank || 1);
+    });
+  });
+
+  const rankLabel = { 1: "1er", 2: "2eme", 3: "3eme", 4: "4eme" };
+
+  function getRankLabel(rank) {
+    const r = rank || 1;
+    return rankLabel[r] || `${r}eme`;
+  }
 
   return (
-    <>
-      <section className="section" style={{ paddingTop: 140 }}>
-        <div className="container">
-          <span className="eyebrow">Le challenge</span>
-          <h1 className="section-title">SmackBeat</h1>
+    <div className="smackbeat-page">
+      {instrumentalReady && (
+        <a
+          href={data.instrumentalUrl}
+          download
+          className="smackbeat-float-download"
+          aria-label="Telecharger l'instrumental"
+        >
+          <span className="smackbeat-float-download__icon">↓</span>
+          <span>Telecharger l'instru</span>
+        </a>
+      )}
 
-          {data.rulesText && (
-            <p className="section-lede" style={{ maxWidth: 720, marginTop: 20 }}>
-              {data.rulesText}
-            </p>
+      <div className="container">
+        <div className="smackbeat-topbar">
+          <span className="smackbeat-topbar__spacer" />
+          {data.tagline && <p className="smackbeat-topbar__tagline">{data.tagline}</p>}
+        </div>
+
+        <div className="smackbeat-columns">
+          <div className="smackbeat-columns__main">
+            <h2 className="smackbeat-heading">condition.</h2>
+            <ul className="smackbeat-list">
+              <li className="smackbeat-list__item-with-btn">
+                <span>telecharge l'instrumental</span>
+                {instrumentalReady ? (
+                  <a href={data.instrumentalUrl} download className="smackbeat-inline-btn">
+                    Telecharger
+                  </a>
+                ) : (
+                  <span className="footer__muted">(bientot disponible)</span>
+                )}
+              </li>
+              <li>
+                fait un titre sur l'instrumental
+                {studios.length > 0
+                  ? " dans l'un de nos studios agrees"
+                  : " en studio"}
+              </li>
+              <li>
+                cree un challenge sur tiktok qui atteint ou depasse les{" "}
+                {(data.reprisesGoal || 4000).toLocaleString("fr-FR")} reprises
+              </li>
+            </ul>
+
+            <h2 className="smackbeat-heading" style={{ marginTop: 50 }}>prix.</h2>
+            <ul className="smackbeat-list">
+              {data.prizeAmount && <li>gagne {data.prizeAmount} en recompense</li>}
+              {data.clipCredit && <li>gagne {data.clipCredit}</li>}
+              {!data.prizeAmount && !data.clipCredit && (
+                <li className="footer__muted">Prix bientot annonces</li>
+              )}
+            </ul>
+          </div>
+
+          {data.conceptImage && (
+            <div className="smackbeat-columns__image">
+              <img src={data.conceptImage} alt="Smart BitLock" />
+            </div>
           )}
         </div>
-      </section>
 
-      <section className="section section--alt">
-        <div className="container">
-          <span className="eyebrow">Comment participer</span>
-          <h2 className="section-title" style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)" }}>
-            Les conditions
-          </h2>
-
-          <div className="smackbeat-steps">
-            <div className="smackbeat-step">
-              <span className="smackbeat-step__number">1</span>
-              <div>
-                <h3>Telecharger l'instrumental</h3>
-                <p>Recupere l'instrumental officiel du mois pour enregistrer ton titre.</p>
-                {data.instrumentalUrl ? (
-                  <a
-                    href={data.instrumentalUrl}
-                    download
-                    className="btn btn-primary"
-                    style={{ marginTop: 14 }}
-                  >
-                    Telecharger l'instrumental
-                  </a>
-                ) : (
-                  <span className="footer__muted">Instrumental bientot disponible</span>
-                )}
-              </div>
-            </div>
-
-            <div className="smackbeat-step">
-              <span className="smackbeat-step__number">2</span>
-              <div>
-                <h3>Enregistrer ta chanson chez {data.studioName || "Studio Agri"}</h3>
-                <p>Contacte le studio pour reserver ton creneau d'enregistrement.</p>
-                {data.studioPhone ? (
-                  <a href={`tel:${phoneDigitsOnly}`} className="btn btn-outline" style={{ marginTop: 14 }}>
-                    {data.studioName || "Studio Agri"} — {data.studioPhone}
-                  </a>
-                ) : (
-                  <span className="footer__muted">Contact bientot disponible</span>
-                )}
-              </div>
-            </div>
-
-            <div className="smackbeat-step">
-              <span className="smackbeat-step__number">3</span>
-              <div>
-                <h3>Lancer ton challenge sur TikTok</h3>
-                <p>
-                  {data.tiktokInstructions ||
-                    "Publie ta video sur TikTok avec ton titre sur l'instrumental SmackBeat."}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {data.prizeText && (
-        <section className="section">
-          <div className="container">
-            <span className="eyebrow">A gagner</span>
+        {months.length > 0 && (
+          <div className="smackbeat-ranking">
+            <span className="eyebrow">Classement</span>
             <h2 className="section-title" style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)" }}>
-              Les prix du mois
-            </h2>
-            <p className="section-lede" style={{ maxWidth: 720 }}>
-              {data.prizeText}
-            </p>
-          </div>
-        </section>
-      )}
-
-      {winners.length > 0 && (
-        <section className="section section--alt">
-          <div className="container">
-            <span className="eyebrow">Historique</span>
-            <h2 className="section-title" style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)" }}>
-              Les gagnants precedents
+              Les vainqueurs du challenge
             </h2>
 
-            <div className="grid" style={{ marginTop: 30 }}>
-              {winners.map(function (w) {
-                return (
-                  <div key={w._id} className="smackbeat-winner-card">
-                    {w.image && (
-                      <div className="smackbeat-winner-card__image">
-                        <img src={w.image} alt={w.winnerName} />
-                      </div>
-                    )}
-                    <div className="smackbeat-winner-card__content">
-                      <span className="admin-chip">{w.month}</span>
-                      <h3>{w.winnerName}</h3>
-                      {w.description && <p>{w.description}</p>}
-                      {w.tiktokUrl && (
-                        <a href={w.tiktokUrl} target="_blank" rel="noreferrer" className="btn btn-outline btn-sm">
-                          Voir sur TikTok
-                        </a>
-                      )}
-                    </div>
+            {months.map(function (month) {
+              const monthWinners = winnersByMonth[month];
+              return (
+                <div key={month} className="smackbeat-ranking__month">
+                  <h3 className="smackbeat-ranking__month-title">{month}</h3>
+                  <div className="smackbeat-ranking__list">
+                    {monthWinners.map(function (w) {
+                      return (
+                        <div key={w._id} className="smackbeat-ranking__row">
+                          <span className="smackbeat-ranking__rank">
+                            {getRankLabel(w.rank)}
+                          </span>
+
+                          <div className="smackbeat-ranking__person">
+                            {w.image && (
+                              <div className="smackbeat-ranking__image">
+                                <img src={w.image} alt={w.winnerName} />
+                              </div>
+                            )}
+                            <div className="smackbeat-ranking__info">
+                              <strong>{w.winnerName}</strong>
+                              {w.repriseCount ? (
+                                <span className="footer__muted">
+                                  {w.repriseCount.toLocaleString("fr-FR")} republications
+                                </span>
+                              ) : null}
+                            </div>
+                          </div>
+
+                          {w.tiktokUrl && (
+                            <a
+                              href={w.tiktokUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="smackbeat-ranking__tiktok"
+                              aria-label="Voir sur TikTok"
+                            >
+                              <SocialIcon platform="tiktok" />
+                            </a>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
-        </section>
-      )}
-    </>
+        )}
+      </div>
+    </div>
   );
 }
