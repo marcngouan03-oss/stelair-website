@@ -3,7 +3,7 @@ import api from "../api/api";
 
 // Composant d'upload reutilisable : envoie le fichier au backend (-> Cloudinary)
 // et remonte { url, publicId } au formulaire parent via onUploaded.
-// C'est le seul endroit ou l'upload est gere, pour que TOUTES les images/videos
+// C'est le seul endroit ou l'upload est gere, pour que TOUTES les images/videos/audios
 // du site passent par Cloudinary et ne soient jamais perdues apres deploiement.
 export default function MediaUploader({ label, folder = "misc", accept = "image/*", currentUrl, onUploaded }) {
   const inputRef = useRef();
@@ -32,13 +32,16 @@ export default function MediaUploader({ label, folder = "misc", accept = "image/
   };
 
   const isVideo = accept.includes("video");
+  const isAudio = accept.includes("audio");
 
   return (
     <div className="media-uploader">
       {label && <label>{label}</label>}
       <div className="media-uploader__preview">
         {preview ? (
-          isVideo ? (
+          isAudio ? (
+            <audio src={preview} controls style={{ width: "100%" }} />
+          ) : isVideo ? (
             <video src={preview} controls />
           ) : (
             <img src={preview} alt="Apercu" />

@@ -9,18 +9,31 @@ cloudinary.config({
 });
 
 // Stockage centralise dans un seul dossier Cloudinary "stelair" avec sous-dossiers
-// pour ne jamais perdre les images apres le deploiement (Cloudinary = source de verite,
+// pour ne jamais perdre les fichiers apres le deploiement (Cloudinary = source de verite,
 // jamais le disque local de Railway/Netlify qui est ephemere).
+//
+// IMPORTANT : Cloudinary classe les fichiers AUDIO (mp3, wav...) dans la
+// categorie "video". C'est sa convention. Donc audio => resource_type "video".
 const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
     const folder = req.query.folder || "misc";
     const isVideo = file.mimetype.startsWith("video/");
+    const isAudio = file.mimetype.startsWith("audio/");
+
     return {
       folder: `stelair/${folder}`,
-      resource_type: isVideo ? "video" : "image",
-      allowed_formats: ["jpg", "jpeg", "png", "webp", "gif", "mp4", "mov"],
-      transformation: isVideo ? undefined : [{ quality: "auto", fetch_format: "auto" }],
+      // audio ET video utilisent "video" chez Cloudinary
+      resource_type: isVideo || isAudio ? "video" : "image",
+      allowed_formats: [
+        "jpg", "jpeg", "png", "webp", "gif",
+        "mp4", "mov",
+        "mp3", "wav", "ogg", "m4a", "aac", "flac",
+      ],
+      // pas de transformation pour les videos et les audios
+      transformation: isVideo || isAudio
+        ? undefined
+        : [{ quality: "auto", fetch_format: "auto" }],
     };
   },
 });

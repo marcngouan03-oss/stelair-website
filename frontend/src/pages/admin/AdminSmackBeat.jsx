@@ -19,6 +19,16 @@ export default function AdminSmackBeat() {
     });
   }
 
+  function handleStudioChange(field, value) {
+    setData(function (prev) {
+      const studios = prev.studios && prev.studios.length > 0
+        ? [...prev.studios]
+        : [{ name: "", contact: "" }];
+      studios[0] = { ...studios[0], [field]: value };
+      return { ...prev, studios: studios };
+    });
+  }
+
   function handleSave(e) {
     e.preventDefault();
     setSaving(true);
@@ -41,20 +51,33 @@ export default function AdminSmackBeat() {
     return <div className="loading-screen">Chargement...</div>;
   }
 
+  const studio = (data.studios && data.studios[0]) || { name: "", contact: "" };
+
   return (
     <div>
       <span className="eyebrow">Contenu</span>
       <h2 className="section-title" style={{ fontSize: "2rem" }}>
-        SmackBeat — Challenge du mois
+        SmackBeat &mdash; Challenge du mois
       </h2>
 
       <form className="admin-form" onSubmit={handleSave} style={{ maxWidth: 780 }}>
-        <h3 className="admin-form__block-title">Regles</h3>
+        <h3 className="admin-form__block-title">Presentation</h3>
 
         <div className="form-field">
-          <label>Texte des regles / presentation du challenge</label>
+          <label>Phrase d'accroche (tagline)</label>
+          <input
+            value={data.tagline || ""}
+            onChange={function (e) {
+              handleChange("tagline", e.target.value);
+            }}
+          />
+        </div>
+
+        <div className="form-field">
+          <label>Conditions du challenge (une condition par ligne)</label>
           <textarea
-            rows={4}
+            rows={5}
+            placeholder="telecharge l'instrumental&#10;fait un titre sur l'instrumental en studio&#10;cree un challenge sur tiktok..."
             value={data.rulesText || ""}
             onChange={function (e) {
               handleChange("rulesText", e.target.value);
@@ -63,7 +86,7 @@ export default function AdminSmackBeat() {
         </div>
 
         <hr className="admin-form__divider" />
-        <h3 className="admin-form__block-title">Etape 1 — Instrumental</h3>
+        <h3 className="admin-form__block-title">Etape 1 &mdash; Instrumental</h3>
 
         <MediaUploader
           label="Instrumental du mois (audio)"
@@ -77,56 +100,66 @@ export default function AdminSmackBeat() {
         />
 
         <hr className="admin-form__divider" />
-        <h3 className="admin-form__block-title">Etape 2 — Studio</h3>
+        <h3 className="admin-form__block-title">Etape 2 &mdash; Studio</h3>
 
         <div className="collab-form__row">
           <div className="form-field">
             <label>Nom du studio</label>
             <input
-              value={data.studioName || ""}
+              value={studio.name || ""}
               onChange={function (e) {
-                handleChange("studioName", e.target.value);
+                handleStudioChange("name", e.target.value);
               }}
             />
           </div>
           <div className="form-field">
             <label>Numero de telephone du studio</label>
             <input
-              value={data.studioPhone || ""}
+              value={studio.contact || ""}
               placeholder="+225 07 00 00 00 00"
               onChange={function (e) {
-                handleChange("studioPhone", e.target.value);
+                handleStudioChange("contact", e.target.value);
               }}
             />
           </div>
         </div>
 
         <hr className="admin-form__divider" />
-        <h3 className="admin-form__block-title">Etape 3 — TikTok</h3>
+        <h3 className="admin-form__block-title">Etape 3 &mdash; TikTok</h3>
 
         <div className="form-field">
-          <label>Instructions pour le challenge TikTok</label>
-          <textarea
-            rows={3}
-            value={data.tiktokInstructions || ""}
+          <label>Objectif de reprises TikTok (ex: 4000)</label>
+          <input
+            type="number"
+            value={data.reprisesGoal != null ? data.reprisesGoal : 4000}
             onChange={function (e) {
-              handleChange("tiktokInstructions", e.target.value);
+              handleChange("reprisesGoal", Number(e.target.value));
             }}
           />
         </div>
 
         <hr className="admin-form__divider" />
-        <h3 className="admin-form__block-title">Prix a gagner (change chaque mois)</h3>
+        <h3 className="admin-form__block-title">Prix a Gagner (change chaque mois)</h3>
 
-        <div className="form-field">
-          <label>Texte des prix / recompenses</label>
-          <textarea
-            rows={3}
-            value={data.prizeText || ""}
-            onChange={function (e) {
-              handleChange("prizeText", e.target.value);
-            }}
-          />
+        <div className="collab-form__row">
+          <div className="form-field">
+            <label>Montant de la recompense (ex: 200 000)</label>
+            <input
+              value={data.prizeAmount || ""}
+              onChange={function (e) {
+                handleChange("prizeAmount", e.target.value);
+              }}
+            />
+          </div>
+          <div className="form-field">
+            <label>Credit du clip (ex: un clip produit par KUMA.group)</label>
+            <input
+              value={data.clipCredit || ""}
+              onChange={function (e) {
+                handleChange("clipCredit", e.target.value);
+              }}
+            />
+          </div>
         </div>
 
         {message && <p style={{ color: "var(--c-lime)", fontSize: "0.88rem" }}>{message}</p>}

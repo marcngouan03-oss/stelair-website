@@ -28,6 +28,11 @@ export default function SmackBeat() {
   const studios = data.studios || [];
   const instrumentalReady = !!data.instrumentalUrl;
 
+  const customRules = (data.rulesText || "")
+    .split("\n")
+    .map(function (l) { return l.trim(); })
+    .filter(function (l) { return l !== ""; });
+
   const winnersByMonth = {};
   winners.forEach(function (w) {
     if (!winnersByMonth[w.month]) winnersByMonth[w.month] = [];
@@ -44,7 +49,7 @@ export default function SmackBeat() {
 
   function getRankLabel(rank) {
     const r = rank || 1;
-    return rankLabel[r] || `${r}eme`;
+    return rankLabel[r] || (r + "eme");
   }
 
   return (
@@ -56,7 +61,7 @@ export default function SmackBeat() {
           className="smackbeat-float-download"
           aria-label="Telecharger l'instrumental"
         >
-          <span className="smackbeat-float-download__icon">↓</span>
+          <span className="smackbeat-float-download__icon">&#8595;</span>
           <span>Telecharger l'instru</span>
         </a>
       )}
@@ -70,33 +75,50 @@ export default function SmackBeat() {
         <div className="smackbeat-columns">
           <div className="smackbeat-columns__main">
             <h2 className="smackbeat-heading">condition.</h2>
-            <ul className="smackbeat-list">
-              <li className="smackbeat-list__item-with-btn">
-                <span>telecharge l'instrumental</span>
-                {instrumentalReady ? (
-                  <a href={data.instrumentalUrl} download className="smackbeat-inline-btn">
-                    Telecharger
-                  </a>
-                ) : (
-                  <span className="footer__muted">(bientot disponible)</span>
+
+            {customRules.length > 0 ? (
+              <ul className="smackbeat-list">
+                {customRules.map(function (rule, i) {
+                  return <li key={i}>{rule}</li>;
+                })}
+                {instrumentalReady && (
+                  <li className="smackbeat-list__item-with-btn">
+                    <span>l'instrumental est disponible</span>
+                    <a href={data.instrumentalUrl} download className="smackbeat-inline-btn">
+                      Telecharger
+                    </a>
+                  </li>
                 )}
-              </li>
-              <li>
-                fait un titre sur l'instrumental
-                {studios.length > 0
-                  ? " dans l'un de nos studios agrees"
-                  : " en studio"}
-              </li>
-              <li>
-                cree un challenge sur tiktok qui atteint ou depasse les{" "}
-                {(data.reprisesGoal || 4000).toLocaleString("fr-FR")} reprises
-              </li>
-            </ul>
+              </ul>
+            ) : (
+              <ul className="smackbeat-list">
+                <li className="smackbeat-list__item-with-btn">
+                  <span>telecharge l'instrumental</span>
+                  {instrumentalReady ? (
+                    <a href={data.instrumentalUrl} download className="smackbeat-inline-btn">
+                      Telecharger
+                    </a>
+                  ) : (
+                    <span className="footer__muted">(bientot disponible)</span>
+                  )}
+                </li>
+                <li>
+                  fait un titre sur l'instrumental
+                  {studios.length > 0
+                    ? " dans l'un de nos studios agrees"
+                    : " en studio"}
+                </li>
+                <li>
+                  cree un challenge sur tiktok qui atteint ou depasse les{" "}
+                  {(data.reprisesGoal || 4000).toLocaleString("fr-FR")} reprises
+                </li>
+              </ul>
+            )}
 
             <h2 className="smackbeat-heading" style={{ marginTop: 50 }}>prix.</h2>
             <ul className="smackbeat-list">
-              {data.prizeAmount && <li>gagne {data.prizeAmount} en recompense</li>}
-              {data.clipCredit && <li>gagne {data.clipCredit}</li>}
+              {data.prizeAmount && <li>Gagne {data.prizeAmount} en recompense</li>}
+              {data.clipCredit && <li>Gagne {data.clipCredit}</li>}
               {!data.prizeAmount && !data.clipCredit && (
                 <li className="footer__muted">Prix bientot annonces</li>
               )}
@@ -105,7 +127,7 @@ export default function SmackBeat() {
 
           {data.conceptImage && (
             <div className="smackbeat-columns__image">
-              <img src={data.conceptImage} alt="Smart BitLock" />
+              <img src={data.conceptImage} alt="SmackBeat" />
             </div>
           )}
         </div>
