@@ -215,8 +215,8 @@
 }
 
 .footer__bottom {
-  margin-top: 60px;
-  padding-top: 34px;
+  margin-top: 40px;
+  padding: 34px 0 24px;
   border-top: 1px solid var(--c-charcoal);
   color: var(--c-grey);
   font-size: 0.78rem;
@@ -224,19 +224,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
   flex-wrap: wrap;
+}
+
+.footer__bottom-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
 }
 
 .footer__copyright {
   flex-shrink: 0;
+  color: var(--c-grey);
+  opacity: 0.95;
 }
 
 .footer__credit {
   color: var(--c-grey);
   opacity: 0.85;
-  flex: 1;
-  text-align: center;
+  text-align: right;
+  min-width: 180px;
 }
 
 @media (max-width: 700px) {
@@ -252,15 +261,26 @@
 
 /* Lien discret vers l'administration : un point presque invisible, agrandi seulement au survol */
 .footer__admin-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
   color: var(--c-charcoal);
-  font-size: 1rem;
-  padding: 10px;
-  transition: color 0.3s ease;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
   user-select: none;
 }
 
-.footer__admin-dot:hover {
+.footer__admin-dot:hover,
+.footer__admin-dot:focus-visible {
   color: var(--c-ember);
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.05);
 }
 
 @media (max-width: 860px) {
