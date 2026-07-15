@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/api";
 import HeroSection from "../components/HeroSection";
+import HelpWidget from "../components/HelpWidget";
 import "../styles/pages.css";
 
 export default function Home() {
@@ -20,6 +21,8 @@ export default function Home() {
 
   return (
     <>
+      <HelpWidget />
+
       <HeroSection
         page="home"
         fallbackTitle="STELAIR"

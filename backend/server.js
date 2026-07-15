@@ -70,6 +70,7 @@ app.use("/api/bio", require("./routes/bioRoutes"));
 app.use("/api/upload", require("./routes/uploadRoutes"));
 app.use("/api/smackbeat", require("./routes/smackBeatRoutes"));
 app.use("/api/smackbeat-winners", require("./routes/smackBeatWinnerRoutes"));
+app.use("/api/help-widget", require("./routes/helpWidgetRoutes"));
 
 app.use(notFound);
 app.use(errorHandler);

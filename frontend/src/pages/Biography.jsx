@@ -54,8 +54,12 @@ export default function Biography() {
 
       {sections.map(function (s, i) {
         const imageOnLeft = s.imagePosition === "left";
-        const sectionClass = i % 2 === 0 ? "section" : "section section--alt";
-        const blockClass = imageOnLeft ? "bio-block bio-block--reverse" : "bio-block";
+        const sectionClass = i % 2 === 0 ? "section bio-section" : "section section--alt bio-section";
+        const blockClass = !s.image
+          ? "bio-block bio-block--text-only"
+          : imageOnLeft
+          ? "bio-block bio-block--reverse"
+          : "bio-block";
 
         return (
           <section key={s._id || i} className={sectionClass}>

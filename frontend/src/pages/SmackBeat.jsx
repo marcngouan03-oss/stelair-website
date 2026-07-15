@@ -66,63 +66,81 @@ export default function SmackBeat() {
         </a>
       )}
 
-      <div className="container">
-        <div className="smackbeat-topbar">
-          <span className="smackbeat-topbar__spacer" />
-          {data.tagline && <p className="smackbeat-topbar__tagline">{data.tagline}</p>}
+      {data.heroImage && (
+        <div className="smackbeat-hero">
+          <img src={data.heroImage} alt="SmackBeat" />
+          <div className="smackbeat-hero__overlay" />
+          <div className="container smackbeat-hero__content">
+            <span className="eyebrow">Challenge du mois</span>
+            <h1 className="smackbeat-hero__title">SmackBeat</h1>
+            {data.tagline && <p className="smackbeat-hero__tagline">{data.tagline}</p>}
+          </div>
         </div>
+      )}
+
+      <div className="container">
+        {!data.heroImage && (
+          <div className="smackbeat-topbar">
+            <span className="smackbeat-topbar__spacer" />
+            {data.tagline && <p className="smackbeat-topbar__tagline">{data.tagline}</p>}
+          </div>
+        )}
 
         <div className="smackbeat-columns">
           <div className="smackbeat-columns__main">
-            <h2 className="smackbeat-heading">condition.</h2>
+            <div className="smackbeat-panel">
+              <h2 className="smackbeat-heading">condition.</h2>
 
-            {customRules.length > 0 ? (
-              <ul className="smackbeat-list">
-                {customRules.map(function (rule, i) {
-                  return <li key={i}>{rule}</li>;
-                })}
-                {instrumentalReady && (
+              {customRules.length > 0 ? (
+                <ul className="smackbeat-list">
+                  {customRules.map(function (rule, i) {
+                    return <li key={i}>{rule}</li>;
+                  })}
+                  {instrumentalReady && (
+                    <li className="smackbeat-list__item-with-btn">
+                      <span>l'instrumental est disponible</span>
+                      <a href={data.instrumentalUrl} download className="smackbeat-inline-btn">
+                        Telecharger
+                      </a>
+                    </li>
+                  )}
+                </ul>
+              ) : (
+                <ul className="smackbeat-list">
                   <li className="smackbeat-list__item-with-btn">
-                    <span>l'instrumental est disponible</span>
-                    <a href={data.instrumentalUrl} download className="smackbeat-inline-btn">
-                      Telecharger
-                    </a>
+                    <span>telecharge l'instrumental</span>
+                    {instrumentalReady ? (
+                      <a href={data.instrumentalUrl} download className="smackbeat-inline-btn">
+                        Telecharger
+                      </a>
+                    ) : (
+                      <span className="footer__muted">(bientot disponible)</span>
+                    )}
                   </li>
+                  <li>
+                    fait un titre sur l'instrumental
+                    {studios.length > 0
+                      ? " dans l'un de nos studios agrees"
+                      : " en studio"}
+                  </li>
+                  <li>
+                    cree un challenge sur tiktok qui atteint ou depasse les{" "}
+                    {(data.reprisesGoal || 4000).toLocaleString("fr-FR")} reprises
+                  </li>
+                </ul>
+              )}
+            </div>
+
+            <div className="smackbeat-panel smackbeat-panel--prize">
+              <h2 className="smackbeat-heading">prix.</h2>
+              <ul className="smackbeat-list">
+                {data.prizeAmount && <li>Gagne {data.prizeAmount} en recompense</li>}
+                {data.clipCredit && <li>Gagne {data.clipCredit}</li>}
+                {!data.prizeAmount && !data.clipCredit && (
+                  <li className="footer__muted">Prix bientot annonces</li>
                 )}
               </ul>
-            ) : (
-              <ul className="smackbeat-list">
-                <li className="smackbeat-list__item-with-btn">
-                  <span>telecharge l'instrumental</span>
-                  {instrumentalReady ? (
-                    <a href={data.instrumentalUrl} download className="smackbeat-inline-btn">
-                      Telecharger
-                    </a>
-                  ) : (
-                    <span className="footer__muted">(bientot disponible)</span>
-                  )}
-                </li>
-                <li>
-                  fait un titre sur l'instrumental
-                  {studios.length > 0
-                    ? " dans l'un de nos studios agrees"
-                    : " en studio"}
-                </li>
-                <li>
-                  cree un challenge sur tiktok qui atteint ou depasse les{" "}
-                  {(data.reprisesGoal || 4000).toLocaleString("fr-FR")} reprises
-                </li>
-              </ul>
-            )}
-
-            <h2 className="smackbeat-heading" style={{ marginTop: 50 }}>prix.</h2>
-            <ul className="smackbeat-list">
-              {data.prizeAmount && <li>Gagne {data.prizeAmount} en recompense</li>}
-              {data.clipCredit && <li>Gagne {data.clipCredit}</li>}
-              {!data.prizeAmount && !data.clipCredit && (
-                <li className="footer__muted">Prix bientot annonces</li>
-              )}
-            </ul>
+            </div>
           </div>
 
           {data.conceptImage && (
@@ -173,10 +191,18 @@ export default function SmackBeat() {
                               href={w.tiktokUrl}
                               target="_blank"
                               rel="noreferrer"
-                              className="smackbeat-ranking__tiktok"
+                              className={
+                                data.tiktokIcon
+                                  ? "smackbeat-ranking__tiktok smackbeat-ranking__tiktok--custom"
+                                  : "smackbeat-ranking__tiktok smackbeat-ranking__tiktok--default"
+                              }
                               aria-label="Voir sur TikTok"
                             >
-                              <SocialIcon platform="tiktok" />
+                              {data.tiktokIcon ? (
+                                <img src={data.tiktokIcon} alt="TikTok" />
+                              ) : (
+                                <SocialIcon platform="tiktok" />
+                              )}
                             </a>
                           )}
                         </div>

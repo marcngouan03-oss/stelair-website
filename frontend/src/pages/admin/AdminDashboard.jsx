@@ -13,6 +13,7 @@ const cards = [
   { to: "/plateformes", title: "Plateformes streaming", desc: "Spotify, Apple Music, SoundCloud, Deezer..." },
   { to: "/agents", title: "Agents / Contacts", desc: "Contacts affiches sur la page Contact / Booking." },
   { to: "/demandes", title: "Demandes de collab", desc: "Consulter les messages recus via le formulaire du site." },
+  { to: "/bouton-aide", title: "Bouton d'aide", desc: "Activer le bouton flottant d'accueil et ses actualites." },
 ];
 
 export default function AdminDashboard() {

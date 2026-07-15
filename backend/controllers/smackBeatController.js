@@ -27,6 +27,32 @@ const updateSmackBeat = asyncHandler(async (req, res) => {
     }
   }
 
+  // Si l'image du hero change, on nettoie l'ancienne sur Cloudinary
+  if (
+    req.body.heroImage &&
+    sb.heroImagePublicId &&
+    req.body.heroImage !== sb.heroImage
+  ) {
+    try {
+      await cloudinary.uploader.destroy(sb.heroImagePublicId, { resource_type: "image" });
+    } catch (e) {
+      console.warn("Nettoyage Cloudinary echoue (ignore) :", e.message);
+    }
+  }
+
+  // Si l'icone TikTok change, on nettoie l'ancienne sur Cloudinary
+  if (
+    req.body.tiktokIcon &&
+    sb.tiktokIconPublicId &&
+    req.body.tiktokIcon !== sb.tiktokIcon
+  ) {
+    try {
+      await cloudinary.uploader.destroy(sb.tiktokIconPublicId, { resource_type: "image" });
+    } catch (e) {
+      console.warn("Nettoyage Cloudinary echoue (ignore) :", e.message);
+    }
+  }
+
   Object.assign(sb, req.body);
   await sb.save();
   res.json(sb);

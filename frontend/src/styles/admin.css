@@ -59,6 +59,15 @@
   color: var(--c-ember) !important;
 }
 
+/* ---------- BARRE MOBILE + MENU TIROIR (masques sur desktop) ---------- */
+.admin-mobile-topbar {
+  display: none;
+}
+
+.admin-sidebar__backdrop {
+  display: none;
+}
+
 .admin-main {
   flex: 1;
   padding: 40px;
@@ -166,6 +175,53 @@
 
 .form-field--checkbox input {
   width: auto;
+}
+
+.admin-form__block-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 1.05rem;
+  color: var(--c-white);
+  margin: 6px 0 -4px;
+}
+
+.admin-form__divider {
+  border: none;
+  border-top: 1px solid var(--c-charcoal);
+  margin: 10px 0;
+}
+
+.admin-form__hint {
+  color: var(--c-grey);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: -8px 0 0;
+}
+
+.admin-section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--c-black);
+  border: 1px solid var(--c-charcoal);
+  border-radius: var(--radius-md);
+  padding: 22px;
+}
+
+.admin-section-block__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-section-block__header strong {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  color: var(--c-gold);
 }
 
 /* Champs de saisie : taille de police 16px minimum sur mobile pour eviter
@@ -293,31 +349,118 @@
   .admin-shell {
     flex-direction: column;
   }
+
+  /* Barre superieure fixe avec le bouton pour ouvrir le menu */
+  .admin-mobile-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1100;
+    height: 60px;
+    padding: 0 18px;
+    background: var(--c-black-soft);
+    border-bottom: 1px solid var(--c-charcoal);
+  }
+
+  .admin-mobile-topbar__logo {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+  }
+
+  .admin-mobile-topbar__logo span {
+    color: var(--c-ember);
+  }
+
+  .admin-mobile-topbar__toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: 1px solid var(--c-charcoal);
+    border-radius: var(--radius-sm);
+  }
+
+  .admin-mobile-topbar__toggle span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--c-white);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .admin-mobile-topbar__toggle--open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .admin-mobile-topbar__toggle--open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .admin-mobile-topbar__toggle--open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Fond sombre derriere le tiroir ouvert */
+  .admin-sidebar__backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 1150;
+  }
+
+  /* La sidebar devient un tiroir qui glisse depuis la gauche */
   .admin-sidebar {
-    width: 100%;
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 14px;
-    gap: 4px;
-    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1200;
+    width: 78vw;
+    max-width: 300px;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 24px 18px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.4);
   }
+
+  .admin-sidebar--open {
+    transform: translateX(0);
+  }
+
   .admin-sidebar__logo {
-    display: none;
+    display: block;
   }
+
   .admin-sidebar a,
   .admin-sidebar button {
-    width: auto;
-    white-space: nowrap;
-    padding: 10px 14px;
+    width: 100%;
+    white-space: normal;
+    padding: 13px 14px;
   }
+
   .admin-sidebar__logout {
-    margin-top: 0;
-    border-top: none;
-    padding-top: 10px !important;
+    margin-top: auto;
+    border-top: 1px solid var(--c-charcoal);
+    padding-top: 20px !important;
   }
+
   .admin-main {
     padding: 24px;
+    padding-top: 84px;
   }
+
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
@@ -329,6 +472,7 @@
 @media (max-width: 600px) {
   .admin-main {
     padding: 16px;
+    padding-top: 76px;
   }
 
   .admin-panel__header {

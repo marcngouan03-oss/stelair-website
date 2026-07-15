@@ -9,6 +9,7 @@ import Music from "./pages/Music";
 import Videos from "./pages/Videos";
 import Contact from "./pages/Contact";
 import SmackBeat from "./pages/SmackBeat";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -24,6 +25,7 @@ import AdminAgents from "./pages/admin/AdminAgents";
 import AdminCollabs from "./pages/admin/AdminCollabs";
 import AdminSmackBeat from "./pages/admin/AdminSmackBeat";
 import AdminSmackBeatWinners from "./pages/admin/AdminSmackBeatWinners";
+import AdminHelpWidget from "./pages/admin/AdminHelpWidget";
 
 // Le chemin de la page admin est configurable via VITE_ADMIN_PATH pour rester discret
 // et facile a changer sans toucher au code (ex: /backstage, /studio-stelair, etc.)
@@ -41,6 +43,7 @@ export default function App() {
           <Route path="/videos" element={<Videos />} />
           <Route path="/smackbeat" element={<SmackBeat />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
         </Route>
 
         {/* --- ADMINISTRATION (lien discret) --- */}
@@ -64,6 +67,7 @@ export default function App() {
           <Route path="demandes" element={<AdminCollabs />} />
           <Route path="smackbeat" element={<AdminSmackBeat />} />
           <Route path="smackbeat-gagnants" element={<AdminSmackBeatWinners />} />
+          <Route path="bouton-aide" element={<AdminHelpWidget />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

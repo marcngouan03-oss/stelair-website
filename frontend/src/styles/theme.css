@@ -119,6 +119,10 @@ button {
   position: relative;
 }
 
+.section--alt {
+  background: var(--c-black-soft);
+}
+
 @media (max-width: 768px) {
   .section {
     padding: 60px 0;

@@ -63,6 +63,17 @@ export default function AdminSmackBeat() {
       <form className="admin-form" onSubmit={handleSave} style={{ maxWidth: 780 }}>
         <h3 className="admin-form__block-title">Presentation</h3>
 
+        <MediaUploader
+          label="Image du hero (fond sombre en haut de la page SmackBeat)"
+          folder="smackbeat"
+          accept="image/*"
+          currentUrl={data.heroImage}
+          onUploaded={function (url, publicId) {
+            handleChange("heroImage", url);
+            handleChange("heroImagePublicId", publicId);
+          }}
+        />
+
         <div className="form-field">
           <label>Phrase d'accroche (tagline)</label>
           <input
@@ -137,6 +148,17 @@ export default function AdminSmackBeat() {
             }}
           />
         </div>
+
+        <MediaUploader
+          label="Icone TikTok (affichee a cote de chaque vainqueur dans le classement)"
+          folder="smackbeat"
+          accept="image/*"
+          currentUrl={data.tiktokIcon}
+          onUploaded={function (url, publicId) {
+            handleChange("tiktokIcon", url);
+            handleChange("tiktokIconPublicId", publicId);
+          }}
+        />
 
         <hr className="admin-form__divider" />
         <h3 className="admin-form__block-title">Prix a Gagner (change chaque mois)</h3>

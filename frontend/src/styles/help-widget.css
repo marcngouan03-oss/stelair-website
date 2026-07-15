@@ -1,0 +1,163 @@
+/* ---------- BOUTON FLOTTANT "BESOIN D'AIDE ?" ---------- */
+@keyframes help-widget-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.help-widget {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.help-widget__button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px 14px 16px;
+  border-radius: 999px;
+  background: var(--c-black-soft);
+  border: 1px solid var(--c-charcoal);
+  color: var(--c-white);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.help-widget__button:hover {
+  border-color: var(--c-gold);
+  transform: translateY(-2px);
+}
+
+.help-widget__button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--c-gold);
+  color: var(--c-black);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.help-widget__panel {
+  width: min(320px, calc(100vw - 48px));
+  max-height: min(420px, calc(100vh - 140px));
+  display: flex;
+  flex-direction: column;
+  background: var(--c-black-soft);
+  border: 1px solid var(--c-charcoal);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  animation: help-widget-pop 0.22s ease both;
+}
+
+.help-widget__panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--c-charcoal);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--c-grey);
+}
+
+.help-widget__close {
+  background: none;
+  border: none;
+  color: var(--c-grey);
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.help-widget__close:hover {
+  color: var(--c-white);
+}
+
+.help-widget__list {
+  padding: 8px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.help-widget__item {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--c-charcoal);
+}
+
+.help-widget__item:last-child {
+  border-bottom: none;
+}
+
+.help-widget__item p {
+  margin: 0;
+  color: var(--c-white);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.help-widget__item-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--c-gold);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.help-widget__empty {
+  padding: 18px 12px;
+  color: var(--c-grey);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .help-widget {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .help-widget__button {
+    padding: 12px 18px 12px 12px;
+    font-size: 0.72rem;
+    max-width: 62vw;
+  }
+
+  .help-widget__button span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .help-widget__button-icon {
+    width: 22px;
+    height: 22px;
+  }
+}

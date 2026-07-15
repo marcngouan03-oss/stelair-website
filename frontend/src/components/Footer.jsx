@@ -59,9 +59,15 @@ export default function Footer() {
       </div>
 
       <div className="container footer__bottom">
-        <span className="footer__copyright">
-          © {new Date().getFullYear()} STELAIR. Tous droits réservés.
-        </span>
+        <div className="footer__legal">
+          <span className="footer__copyright">
+            © {new Date().getFullYear()} STELAIR. Tous droits réservés.
+          </span>
+          <span className="footer__dot-sep" aria-hidden="true">•</span>
+          <Link to="/politique-confidentialite" className="footer__legal-link">
+            Politique de confidentialité
+          </Link>
+        </div>
 
         <div className="footer__bottom-meta">
           <span className="footer__credit">Créateur : Marc N'gouan</span>

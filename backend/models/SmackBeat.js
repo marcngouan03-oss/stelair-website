@@ -17,6 +17,12 @@ const smackBeatSchema = new mongoose.Schema(
     conceptImage: { type: String, default: "" },
     conceptImagePublicId: { type: String, default: "" },
 
+    heroImage: { type: String, default: "" },
+    heroImagePublicId: { type: String, default: "" },
+
+    tiktokIcon: { type: String, default: "" },
+    tiktokIconPublicId: { type: String, default: "" },
+
     instrumentalUrl: { type: String, default: "" },
     instrumentalPublicId: { type: String, default: "" },
 
