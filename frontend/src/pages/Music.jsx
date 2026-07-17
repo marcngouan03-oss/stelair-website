@@ -5,6 +5,8 @@ import TrackCard from "../components/TrackCard";
 import PlatformLinks from "../components/PlatformLinks";
 import "../styles/pages.css";
 
+const typeLabels = { all: "Tout", track: "Titres", album: "Albums", playlist: "Playlists" };
+
 export default function Music() {
   const [tracks, setTracks] = useState([]);
   const [filter, setFilter] = useState("all");
@@ -15,7 +17,6 @@ export default function Music() {
 
   const filtered = filter === "all" ? tracks : tracks.filter((t) => t.type === filter);
   const types = ["all", "track", "album", "playlist"];
-  const typeLabels = { all: "Tout", track: "Titres", album: "Albums", playlist: "Playlists" };
 
   return (
     <>
@@ -23,6 +24,7 @@ export default function Music() {
         page="music"
         fallbackTitle="Musique"
         fallbackSubtitle="Ecoute directement les titres, albums et playlists de STELAIR."
+        compact
       />
 
       <section className="section">

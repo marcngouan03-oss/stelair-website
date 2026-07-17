@@ -277,6 +277,14 @@
   font-size: 0.75rem;
 }
 
+.media-uploader__file-chip {
+  color: var(--c-lime);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 0 1rem;
+}
+
 /* ---------- LOGIN ---------- */
 .admin-login {
   min-height: 100vh;

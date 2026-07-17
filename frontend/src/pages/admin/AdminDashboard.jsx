@@ -13,6 +13,8 @@ const cards = [
   { to: "/plateformes", title: "Plateformes streaming", desc: "Spotify, Apple Music, SoundCloud, Deezer..." },
   { to: "/agents", title: "Agents / Contacts", desc: "Contacts affiches sur la page Contact / Booking." },
   { to: "/demandes", title: "Demandes de collab", desc: "Consulter les messages recus via le formulaire du site." },
+  { to: "/beats", title: "Boutique — Catalogue", desc: "Ajouter les packs de sons (ZIP) en vente sur le site." },
+  { to: "/ventes", title: "Boutique — Ventes", desc: "Historique des achats et repartition 70/30 avec l'artiste." },
   { to: "/bouton-aide", title: "Bouton d'aide", desc: "Activer le bouton flottant d'accueil et ses actualites." },
 ];
 

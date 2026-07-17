@@ -19,10 +19,13 @@
   --c-gold: #e8b04b;         /* touche chaleureuse */
 
   /* --- Typo --- */
-  /* --- Typo --- */
-  --font-display: "Helvetica Neue", "Arial", sans-serif;
-  --font-body: "Helvetica Neue", "Arial", sans-serif;
-  --font-mono: "Arial", sans-serif;
+  /* Sans-serif geometrique et grasse (proche de l'esprit nonstopproductions.fr),
+     chargee dans index.html. Impossible de lire le nom exact de leur police
+     depuis l'exterieur (CSS non accessible via simple fetch) : Archivo est
+     une approximation proche (large gamme de graisses, formes geometriques). */
+  --font-display: "Archivo", "Helvetica Neue", "Arial", sans-serif;
+  --font-body: "Archivo", "Helvetica Neue", "Arial", sans-serif;
+  --font-mono: "Archivo", "Arial", sans-serif;
 
   /* --- Rythme / espace --- */
   --container-max: 1280px;
@@ -150,7 +153,8 @@ button {
   align-items: center;
   gap: 10px;
   padding: 14px 28px;
-  border-radius: 999px;
+  /* Coins nets/geometriques plutot qu'en pilule, esprit nonstopproductions.fr */
+  border-radius: 3px;
   font-family: var(--font-mono);
   font-size: 0.82rem;
   text-transform: uppercase;
@@ -173,6 +177,7 @@ button {
 }
 
 .btn-outline {
+  background: transparent;
   border-color: var(--c-white);
   color: var(--c-white);
 }

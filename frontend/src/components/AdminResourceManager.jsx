@@ -178,13 +178,15 @@ function AdminField({ field, value, onChange }) {
     );
   }
 
-  if (type === "image" || type === "video") {
+  if (type === "image" || type === "video" || type === "file" || type === "audio") {
     const publicIdField = `${name}PublicId`;
+    const defaultAccept =
+      type === "video" ? "video/*" : type === "file" ? ".zip,application/zip" : type === "audio" ? "audio/*" : "image/*";
     return (
       <MediaUploader
         label={label}
         folder={folder || "misc"}
-        accept={accept || (type === "video" ? "video/*" : "image/*")}
+        accept={accept || defaultAccept}
         currentUrl={value}
         onUploaded={(url, publicId) => {
           onChange(name, url);

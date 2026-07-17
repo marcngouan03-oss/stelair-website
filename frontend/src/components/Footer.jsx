@@ -26,6 +26,7 @@ export default function Footer() {
           <Link to="/biographie">Biographie</Link>
           <Link to="/musique">Musique</Link>
           <Link to="/videos">Videos</Link>
+          <Link to="/boutique">Boutique</Link>
           <Link to="/contact">Contact / Booking</Link>
         </div>
 
@@ -37,6 +38,18 @@ export default function Footer() {
               {p.label || p.platform}
             </a>
           ))}
+        </div>
+
+        <div className="footer__col">
+          <h4>Paiement</h4>
+          <div className="footer__payment">
+            <span>Paiement securise</span>
+            <img
+              src="https://www.paypalobjects.com/webstatic/icon/pp258.png"
+              alt="PayPal"
+              className="footer__payment-badge"
+            />
+          </div>
         </div>
 
         <div className="footer__col">

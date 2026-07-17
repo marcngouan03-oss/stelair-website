@@ -14,24 +14,33 @@ cloudinary.config({
 //
 // IMPORTANT : Cloudinary classe les fichiers AUDIO (mp3, wav...) dans la
 // categorie "video". C'est sa convention. Donc audio => resource_type "video".
+// Les ZIP (packs de sons vendus dans la boutique) utilisent resource_type "raw",
+// seule categorie Cloudinary acceptant des fichiers binaires generiques.
 const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
     const folder = req.query.folder || "misc";
     const isVideo = file.mimetype.startsWith("video/");
     const isAudio = file.mimetype.startsWith("audio/");
+    // Le mimetype d'un zip varie selon navigateur/OS (application/zip,
+    // application/x-zip-compressed...), donc on verifie aussi l'extension.
+    const isZip =
+      file.mimetype === "application/zip" ||
+      file.mimetype === "application/x-zip-compressed" ||
+      /\.zip$/i.test(file.originalname);
 
     return {
       folder: `stelair/${folder}`,
-      // audio ET video utilisent "video" chez Cloudinary
-      resource_type: isVideo || isAudio ? "video" : "image",
+      // audio ET video utilisent "video" chez Cloudinary, zip utilise "raw"
+      resource_type: isVideo || isAudio ? "video" : isZip ? "raw" : "image",
       allowed_formats: [
         "jpg", "jpeg", "png", "webp", "gif",
         "mp4", "mov",
         "mp3", "wav", "ogg", "m4a", "aac", "flac",
+        "zip",
       ],
-      // pas de transformation pour les videos et les audios
-      transformation: isVideo || isAudio
+      // pas de transformation pour les videos, audios et zip
+      transformation: isVideo || isAudio || isZip
         ? undefined
         : [{ quality: "auto", fetch_format: "auto" }],
     };
@@ -40,7 +49,9 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({
   storage,
-  limits: { fileSize: 50 * 1024 * 1024 }, // 50MB max
+  // 300MB max : les packs de sons (zip) sont plus lourds que les images/videos
+  // habituelles du site. A ajuster si les packs de l'artiste depassent cette taille.
+  limits: { fileSize: 300 * 1024 * 1024 },
 });
 
 module.exports = { cloudinary, upload };

@@ -54,18 +54,6 @@ export default function SmackBeat() {
 
   return (
     <div className="smackbeat-page">
-      {instrumentalReady && (
-        <a
-          href={data.instrumentalUrl}
-          download
-          className="smackbeat-float-download"
-          aria-label="Telecharger l'instrumental"
-        >
-          <span className="smackbeat-float-download__icon">&#8595;</span>
-          <span>Telecharger l'instru</span>
-        </a>
-      )}
-
       {data.heroImage && (
         <div className="smackbeat-hero">
           <img src={data.heroImage} alt="SmackBeat" />
@@ -73,89 +61,76 @@ export default function SmackBeat() {
           <div className="container smackbeat-hero__content">
             <span className="eyebrow">Challenge du mois</span>
             <h1 className="smackbeat-hero__title">SmackBeat</h1>
-            {data.tagline && <p className="smackbeat-hero__tagline">{data.tagline}</p>}
           </div>
         </div>
       )}
 
-      <div className="container">
+      <div className={`container smackbeat-content ${data.heroImage ? "smackbeat-content--with-hero" : ""}`}>
         {!data.heroImage && (
-          <div className="smackbeat-topbar">
-            <span className="smackbeat-topbar__spacer" />
-            {data.tagline && <p className="smackbeat-topbar__tagline">{data.tagline}</p>}
+          <>
+            <span className="eyebrow">Challenge du mois</span>
+            <h1 className="smackbeat-hero__title" style={{ marginBottom: 10 }}>SmackBeat</h1>
+          </>
+        )}
+
+        {data.tagline && <p className="smackbeat-intro">{data.tagline}</p>}
+
+        <div className="smackbeat-block">
+          <h2 className="smackbeat-heading">Comment participer</h2>
+
+          <div className="smackbeat-download-cta">
+            {instrumentalReady ? (
+              <a href={data.instrumentalUrl} download className="smackbeat-inline-btn">
+                ↓ Telecharger l'instrumental
+              </a>
+            ) : (
+              <span className="footer__muted">Instrumental bientot disponible</span>
+            )}
+          </div>
+
+          {customRules.length > 0 ? (
+            <ol className="smackbeat-steps-list">
+              {customRules.map(function (rule, i) {
+                return <li key={i}>{rule}</li>;
+              })}
+            </ol>
+          ) : (
+            <ol className="smackbeat-steps-list">
+              <li>
+                Enregistre un titre sur l'instrumental
+                {studios.length > 0
+                  ? " dans l'un de nos studios agrees."
+                  : " en studio."}
+              </li>
+              <li>
+                Cree un challenge TikTok qui atteint ou depasse les{" "}
+                {(data.reprisesGoal || 4000).toLocaleString("fr-FR")} reprises.
+              </li>
+            </ol>
+          )}
+        </div>
+
+        {data.conceptImage && (
+          <div className="smackbeat-feature-image">
+            <img src={data.conceptImage} alt="SmackBeat" />
           </div>
         )}
 
-        <div className="smackbeat-columns">
-          <div className="smackbeat-columns__main">
-            <div className="smackbeat-panel">
-              <h2 className="smackbeat-heading">condition.</h2>
-
-              {customRules.length > 0 ? (
-                <ul className="smackbeat-list">
-                  {customRules.map(function (rule, i) {
-                    return <li key={i}>{rule}</li>;
-                  })}
-                  {instrumentalReady && (
-                    <li className="smackbeat-list__item-with-btn">
-                      <span>l'instrumental est disponible</span>
-                      <a href={data.instrumentalUrl} download className="smackbeat-inline-btn">
-                        Telecharger
-                      </a>
-                    </li>
-                  )}
-                </ul>
-              ) : (
-                <ul className="smackbeat-list">
-                  <li className="smackbeat-list__item-with-btn">
-                    <span>telecharge l'instrumental</span>
-                    {instrumentalReady ? (
-                      <a href={data.instrumentalUrl} download className="smackbeat-inline-btn">
-                        Telecharger
-                      </a>
-                    ) : (
-                      <span className="footer__muted">(bientot disponible)</span>
-                    )}
-                  </li>
-                  <li>
-                    fait un titre sur l'instrumental
-                    {studios.length > 0
-                      ? " dans l'un de nos studios agrees"
-                      : " en studio"}
-                  </li>
-                  <li>
-                    cree un challenge sur tiktok qui atteint ou depasse les{" "}
-                    {(data.reprisesGoal || 4000).toLocaleString("fr-FR")} reprises
-                  </li>
-                </ul>
-              )}
-            </div>
-
-            <div className="smackbeat-panel smackbeat-panel--prize">
-              <h2 className="smackbeat-heading">prix.</h2>
-              <ul className="smackbeat-list">
-                {data.prizeAmount && <li>Gagne {data.prizeAmount} en recompense</li>}
-                {data.clipCredit && <li>Gagne {data.clipCredit}</li>}
-                {!data.prizeAmount && !data.clipCredit && (
-                  <li className="footer__muted">Prix bientot annonces</li>
-                )}
-              </ul>
-            </div>
-          </div>
-
-          {data.conceptImage && (
-            <div className="smackbeat-columns__image">
-              <img src={data.conceptImage} alt="SmackBeat" />
-            </div>
-          )}
+        <div className="smackbeat-block">
+          <h2 className="smackbeat-heading">Recompenses</h2>
+          {data.prizeAmount && <p className="smackbeat-prize-amount">{data.prizeAmount}</p>}
+          <ul className="smackbeat-list">
+            {data.clipCredit && <li>{data.clipCredit}.</li>}
+            {!data.prizeAmount && !data.clipCredit && (
+              <li className="footer__muted">Prix bientot annonces.</li>
+            )}
+          </ul>
         </div>
 
         {months.length > 0 && (
           <div className="smackbeat-ranking">
             <span className="eyebrow">Classement</span>
-            <h2 className="section-title" style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)" }}>
-              Les vainqueurs du challenge
-            </h2>
+            <h2 className="smackbeat-heading">Les vainqueurs du challenge</h2>
 
             {months.map(function (month) {
               const monthWinners = winnersByMonth[month];

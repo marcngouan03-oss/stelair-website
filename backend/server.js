@@ -71,6 +71,9 @@ app.use("/api/upload", require("./routes/uploadRoutes"));
 app.use("/api/smackbeat", require("./routes/smackBeatRoutes"));
 app.use("/api/smackbeat-winners", require("./routes/smackBeatWinnerRoutes"));
 app.use("/api/help-widget", require("./routes/helpWidgetRoutes"));
+app.use("/api/beats", require("./routes/beatRoutes"));
+app.use("/api/orders", require("./routes/orderRoutes"));
+app.use("/api/shop-settings", require("./routes/shopSettingsRoutes"));
 
 app.use(notFound);
 app.use(errorHandler);

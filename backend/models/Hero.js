@@ -7,7 +7,7 @@ const heroSchema = new mongoose.Schema(
   {
     page: {
       type: String,
-      enum: ["home", "music", "videos", "biography", "contact"],
+      enum: ["home", "music", "videos", "biography", "contact", "shop"],
       default: "home",
     },
     title: { type: String, required: true, trim: true },

@@ -13,7 +13,7 @@ export default function Videos() {
 
   return (
     <>
-      <HeroSection page="videos" fallbackTitle="Videos" fallbackSubtitle="Les clips officiels de STELAIR, a regarder directement ici." />
+      <HeroSection page="videos" fallbackTitle="Videos" fallbackSubtitle="Les clips officiels de STELAIR, a regarder directement ici." compact />
 
       <section className="section">
         <div className="container">
@@ -21,7 +21,7 @@ export default function Videos() {
           <h2 className="section-title">Clips &amp; visuels</h2>
 
           {videos.length > 0 ? (
-            <div className="grid">
+            <div className="video-grid">
               {videos.map((v) => (
                 <VideoCard key={v._id} video={v} />
               ))}

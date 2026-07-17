@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 import "../styles/layout.css";
 
 const links = [
@@ -7,14 +8,28 @@ const links = [
   { to: "/biographie", label: "Biographie" },
   { to: "/musique", label: "Musique" },
   { to: "/videos", label: "Videos" },
+  { to: "/boutique", label: "Boutique" },
   { to: "/contact", label: "Contact" },
 ];
 
 const smackbeatLink = { to: "/smackbeat", label: "SmackBeat" };
 
+// Icone "sac" minimaliste (style Nike) au lieu d'un emoji, pour rester
+// coherent avec le reste des icones vectorielles du site.
+function BagIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6.5 8h11l1 12.2a1.8 1.8 0 0 1-1.8 1.8H7.3a1.8 1.8 0 0 1-1.8-1.8L6.5 8z" />
+      <path d="M9 10V7a3 3 0 0 1 6 0v3" />
+    </svg>
+  );
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const cart = useCart();
+  const cartCount = cart?.items?.length || 0;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -56,6 +71,18 @@ export default function Navbar() {
           >
             {smackbeatLink.label}
           </NavLink>
+          <button
+            type="button"
+            className="navbar__link navbar__cart"
+            onClick={() => {
+              setOpen(false);
+              cart?.openDrawer();
+            }}
+            aria-label="Ouvrir le panier"
+          >
+            <BagIcon />
+            {cartCount > 0 && <span className="navbar__cart-badge">{cartCount}</span>}
+          </button>
         </nav>
 
         <button

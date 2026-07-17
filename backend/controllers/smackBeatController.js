@@ -17,37 +17,11 @@ const updateSmackBeat = asyncHandler(async (req, res) => {
   // Si l'instrumental change, on nettoie l'ancien fichier sur Cloudinary
   if (
     req.body.instrumentalUrl &&
-    sb.instrumentalPublicId &&
+    sb.instrumentalPublicId && 
     req.body.instrumentalUrl !== sb.instrumentalUrl
   ) {
     try {
       await cloudinary.uploader.destroy(sb.instrumentalPublicId, { resource_type: "video" });
-    } catch (e) {
-      console.warn("Nettoyage Cloudinary echoue (ignore) :", e.message);
-    }
-  }
-
-  // Si l'image du hero change, on nettoie l'ancienne sur Cloudinary
-  if (
-    req.body.heroImage &&
-    sb.heroImagePublicId &&
-    req.body.heroImage !== sb.heroImage
-  ) {
-    try {
-      await cloudinary.uploader.destroy(sb.heroImagePublicId, { resource_type: "image" });
-    } catch (e) {
-      console.warn("Nettoyage Cloudinary echoue (ignore) :", e.message);
-    }
-  }
-
-  // Si l'icone TikTok change, on nettoie l'ancienne sur Cloudinary
-  if (
-    req.body.tiktokIcon &&
-    sb.tiktokIconPublicId &&
-    req.body.tiktokIcon !== sb.tiktokIcon
-  ) {
-    try {
-      await cloudinary.uploader.destroy(sb.tiktokIconPublicId, { resource_type: "image" });
     } catch (e) {
       console.warn("Nettoyage Cloudinary echoue (ignore) :", e.message);
     }

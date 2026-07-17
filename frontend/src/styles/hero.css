@@ -13,6 +13,16 @@
   text-align: center;
 }
 
+.hero--compact {
+  min-height: 42vh;
+}
+
+@media (max-width: 700px) {
+  .hero--compact {
+    min-height: 34vh;
+  }
+}
+
 .hero__bg {
   position: absolute;
   inset: 0;

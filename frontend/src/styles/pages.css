@@ -1,5 +1,5 @@
 /* ==========================================================
-   SMART BITLOCK (page /smackbeat)
+   SMACKBEAT (page /smackbeat) - flux editorial simple, sobre
    ========================================================== */
 
 @keyframes smackbeat-fade-up {
@@ -16,11 +16,11 @@
 /* ---------- HERO (image de fond, ajoutable depuis l'admin) ---------- */
 .smackbeat-hero {
   position: relative;
-  height: 46vh;
-  min-height: 320px;
-  max-height: 480px;
+  height: 34vh;
+  min-height: 260px;
+  max-height: 380px;
   overflow: hidden;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 
 .smackbeat-hero img {
@@ -51,88 +51,51 @@
   color: var(--c-white);
 }
 
-.smackbeat-hero__tagline {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
-  color: var(--c-gold);
-  max-width: 640px;
-  line-height: 1.4;
-}
-
 @media (max-width: 700px) {
   .smackbeat-hero {
-    height: 38vh;
-    min-height: 260px;
-    margin-bottom: 50px;
+    height: 30vh;
+    min-height: 220px;
+    margin-bottom: 40px;
   }
 }
 
-.smackbeat-page > .container:first-of-type {
+/* Sans hero : la page part du tout-haut, il faut degager la navbar fixe.
+   Avec hero : le hero degage deja la navbar, un petit espace suffit avant
+   le contenu (evite le grand vide observe quand les deux s'additionnaient). */
+.smackbeat-content {
   padding-top: 140px;
 }
 
-.smackbeat-topbar {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 60px;
+.smackbeat-content--with-hero {
+  padding-top: 30px;
 }
 
-.smackbeat-topbar__tagline {
+/* ---------- Intro (paragraphe d'accroche, type "bio") ---------- */
+.smackbeat-intro {
   font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 700;
-  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  line-height: 1.55;
   color: var(--c-white);
-  max-width: 460px;
-  text-align: right;
-  line-height: 1.3;
-  position: relative;
-  padding-top: 18px;
+  max-width: 680px;
+  margin: 30px 0 0;
   animation: smackbeat-fade-up 0.6s ease both;
 }
 
-.smackbeat-topbar__tagline::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 60px;
-  height: 3px;
-  background: var(--c-gold);
-}
-
-.smackbeat-columns {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 60px;
-  align-items: start;
-}
-
-.smackbeat-columns__main {
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-}
-
-.smackbeat-panel {
-  background: var(--c-black-soft);
-  border: 1px solid var(--c-charcoal);
-  border-radius: var(--radius-lg);
-  padding: 32px 34px;
+/* ---------- Blocs de contenu empiles, separes par un simple filet ---------- */
+.smackbeat-block {
+  max-width: 680px;
+  margin-top: 64px;
+  padding-top: 36px;
+  border-top: 1px solid var(--c-charcoal);
   animation: smackbeat-fade-up 0.7s ease both;
-}
-
-.smackbeat-panel--prize {
-  animation-delay: 0.08s;
 }
 
 .smackbeat-heading {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-size: clamp(1.7rem, 3.2vw, 2.3rem);
   color: var(--c-gold);
   margin: 0 0 20px;
-  line-height: 1;
+  line-height: 1.1;
 }
 
 .smackbeat-list {
@@ -142,8 +105,6 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  animation: smackbeat-fade-up 0.7s ease both;
-  animation-delay: 0.1s;
 }
 
 .smackbeat-list li {
@@ -161,222 +122,83 @@
   color: var(--c-gold);
 }
 
-.smackbeat-list__link {
+/* ---------- Etapes numerotees ("Comment participer") ---------- */
+.smackbeat-steps-list {
+  counter-reset: smackbeat-step;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.smackbeat-steps-list li {
+  position: relative;
+  padding-left: 42px;
+  color: var(--c-white);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.smackbeat-steps-list li::before {
+  counter-increment: smackbeat-step;
+  content: counter(smackbeat-step);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
   color: var(--c-gold);
-  text-decoration: underline;
 }
 
-.smackbeat-columns__image img {
+/* ---------- Image qui vient couper le texte (image-texte en alternance) ---------- */
+.smackbeat-feature-image {
+  margin: 64px 0 0;
+  max-width: 900px;
+}
+
+.smackbeat-feature-image img {
   width: 100%;
-  border-radius: var(--radius-lg);
+  max-height: 480px;
   object-fit: cover;
-  aspect-ratio: 4/5;
+  border-radius: var(--radius-lg);
   animation: smackbeat-fade-up 0.7s ease both;
-  animation-delay: 0.15s;
 }
 
-@media (max-width: 860px) {
-  .smackbeat-columns {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---------- MOIS EN COURS ---------- */
-.smackbeat-current-month {
-  margin-top: 110px;
-  text-align: right;
-}
-
-.smackbeat-month-giant {
+/* ---------- Montant du prix, mis en avant ---------- */
+.smackbeat-prize-amount {
   font-family: var(--font-display);
   font-weight: 800;
-  text-transform: uppercase;
-  font-size: clamp(3rem, 9vw, 6.5rem);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
   color: var(--c-gold);
-  line-height: 0.9;
-  margin: 0 0 20px;
-  animation: smackbeat-fade-up 0.7s ease both;
+  line-height: 1;
+  margin: 0 0 18px;
 }
 
-.smackbeat-winner-announce {
-  font-family: var(--font-display);
-  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
-  color: var(--c-gold);
-  max-width: 900px;
-  margin: 0 0 40px auto;
-  line-height: 1.4;
-  animation: smackbeat-fade-up 0.7s ease both;
-  animation-delay: 0.1s;
+/* ---------- CTA "TELECHARGER L'INSTRUMENTAL" ---------- */
+.smackbeat-download-cta {
+  margin-bottom: 22px;
 }
 
-.smackbeat-winner-announce a {
-  color: var(--c-gold);
-  text-decoration: underline;
-}
-
-.smackbeat-podium {
-  display: flex;
-  gap: 20px;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  animation: smackbeat-fade-up 0.7s ease both;
-  animation-delay: 0.2s;
-}
-
-.smackbeat-podium__card {
-  background: var(--c-black-soft);
-  border: 1px solid var(--c-charcoal);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  width: 180px;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.smackbeat-podium__image img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
-}
-
-.smackbeat-podium__card a {
-  color: var(--c-gold);
-  font-size: 0.85rem;
-}
-
-@media (max-width: 860px) {
-  .smackbeat-current-month,
-  .smackbeat-winner-announce,
-  .smackbeat-podium {
-    text-align: left;
-    justify-content: flex-start;
-    margin-left: 0;
-  }
-}
-
-/* ---------- HISTORIQUE / TIMELINE ---------- */
-.smackbeat-timeline {
-  margin-top: 90px;
-}
-
-.smackbeat-timeline__row {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding: 20px 0 10px;
-  margin-top: 16px;
-  scrollbar-width: thin;
-}
-
-.smackbeat-timeline__item {
-  flex-shrink: 0;
-  background: var(--c-black-soft);
-  border: 1px solid var(--c-charcoal);
-  border-radius: var(--radius-md);
-  padding: 16px 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 160px;
-}
-
-.smackbeat-timeline__month {
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--c-gold);
-}
-
-.smackbeat-timeline__winner {
-  font-size: 0.95rem;
-  color: var(--c-white);
-}
-
-/* ---------- SmackBeat steps (utilise sur ancienne mise en page, conserve pour compatibilite) ---------- */
-.smackbeat-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  margin-top: 30px;
-}
-
-.smackbeat-step {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-
-.smackbeat-step__number {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  color: var(--c-gold);
-  flex-shrink: 0;
-}
-
-.smackbeat-studios {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-/* ---------- BOUTON FLOTTANT DE TELECHARGEMENT ---------- */
-@keyframes smackbeat-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-.smackbeat-float-download {
-  position: fixed;
-  right: 24px;
-  bottom: 30px;
-  z-index: 500;
-  display: flex;
+.smackbeat-inline-btn {
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 22px;
+  gap: 8px;
+  padding: 12px 22px;
   border-radius: 999px;
   background: var(--c-gold);
   color: var(--c-black);
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-weight: 700;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  animation: smackbeat-float 2.6s ease-in-out infinite;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
-.smackbeat-float-download:hover {
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5);
-}
-
-.smackbeat-float-download__icon {
-  font-size: 1rem;
-  font-weight: 800;
-}
-
-@media (max-width: 600px) {
-  .smackbeat-float-download {
-    right: 16px;
-    bottom: 16px;
-    padding: 12px 16px;
-    font-size: 0.7rem;
-  }
-}
-
-/* ---------- LABEL DE CLASSEMENT SUR LE PODIUM ---------- */
-.smackbeat-podium__rank {
-  font-family: var(--font-display);
-  font-weight: 800;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  color: var(--c-gold);
-  letter-spacing: 0.05em;
+.smackbeat-inline-btn:hover {
+  transform: translateY(-2px);
 }
 
 /* ---------- CLASSEMENT (chart editorial : pas de cartes, juste des filets) ---------- */
@@ -494,21 +316,22 @@
   }
 }
 
-/* ---------- BOUTON INLINE "TELECHARGER" dans la liste des conditions ---------- */
-.smackbeat-list__item-with-btn {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
+/* ---------- CTA "TELECHARGER L'INSTRUMENTAL" (panneau Conditions) ---------- */
+.smackbeat-download-cta {
+  margin-bottom: 22px;
 }
 
 .smackbeat-inline-btn {
-  padding: 6px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
   border-radius: 999px;
   background: var(--c-gold);
   color: var(--c-black);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-weight: 700;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   transition: transform 0.2s ease;

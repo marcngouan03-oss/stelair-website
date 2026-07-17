@@ -33,13 +33,18 @@ export default function MediaUploader({ label, folder = "misc", accept = "image/
 
   const isVideo = accept.includes("video");
   const isAudio = accept.includes("audio");
+  const isZip = accept.includes("zip");
 
   return (
     <div className="media-uploader">
       {label && <label>{label}</label>}
       <div className="media-uploader__preview">
         {preview ? (
-          isAudio ? (
+          isZip ? (
+            // Pas de lien cliquable vers l'URL Cloudinary reelle : le fichier vendu
+            // ne doit jamais etre accessible directement, meme depuis l'admin.
+            <span className="media-uploader__file-chip">Fichier ZIP envoye ✓</span>
+          ) : isAudio ? (
             <audio src={preview} controls style={{ width: "100%" }} />
           ) : isVideo ? (
             <video src={preview} controls />

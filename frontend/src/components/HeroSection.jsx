@@ -6,7 +6,8 @@ const HOME_SOCIAL_ORDER = ["whatsapp", "instagram", "tiktok", "facebook", "snapc
 
 // Hero plein ecran reutilisable sur chaque page (home, music, videos, biography, contact).
 // Si plusieurs heros sont actifs pour la meme page, ils tournent en carousel automatique.
-export default function HeroSection({ page, fallbackTitle, fallbackSubtitle }) {
+// "compact" reduit la hauteur (utilise sur la boutique pour remonter les packs sans scroll).
+export default function HeroSection({ page, fallbackTitle, fallbackSubtitle, compact = false }) {
   const [slides, setSlides] = useState([]);
   const [index, setIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -62,7 +63,7 @@ export default function HeroSection({ page, fallbackTitle, fallbackSubtitle }) {
 
   if (loaded && slides.length === 0) {
     return (
-      <section className="hero hero--fallback">
+      <section className={`hero hero--fallback ${compact ? "hero--compact" : ""}`}>
         <div className="hero__gradient" />
         <div className="container hero__content">
           {socialRow}
@@ -77,7 +78,7 @@ export default function HeroSection({ page, fallbackTitle, fallbackSubtitle }) {
   const slide = slides[index];
 
   return (
-    <section className="hero">
+    <section className={`hero ${compact ? "hero--compact" : ""}`}>
       {slides.map((s, i) => (
         <div key={s._id} className={`hero__bg ${i === index ? "hero__bg--active" : ""}`}>
           {s.mediaType === "video" ? (
@@ -118,10 +119,12 @@ export default function HeroSection({ page, fallbackTitle, fallbackSubtitle }) {
         </div>
       )}
 
-      <div className="hero__scroll-cue">
-        <span className="eq"><span /><span /><span /><span /></span>
-        <span>DEFILER</span>
-      </div>
+      {!compact && (
+        <div className="hero__scroll-cue">
+          <span className="eq"><span /><span /><span /><span /></span>
+          <span>DEFILER</span>
+        </div>
+      )}
     </section>
   );
 }

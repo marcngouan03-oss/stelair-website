@@ -6,6 +6,7 @@ const pageOptions = [
   { value: "videos", label: "Videos" },
   { value: "biography", label: "Biographie" },
   { value: "contact", label: "Contact" },
+  { value: "shop", label: "Boutique" },
 ];
 
 const fieldsConfig = [
