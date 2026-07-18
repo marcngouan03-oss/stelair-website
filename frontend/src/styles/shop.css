@@ -395,57 +395,6 @@
   margin-top: 10px;
 }
 
-.beat-checkout__secure {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  color: var(--c-grey);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  margin-top: 18px;
-  padding-top: 16px;
-  border-top: 1px solid var(--c-charcoal);
-}
-
-.paypal-badge {
-  display: inline-block;
-  height: 40px;
-  width: auto;
-  padding: 6px 14px;
-  background: #ffffff;
-  border: 1px solid var(--c-charcoal);
-  border-radius: 999px;
-}
-
-.beat-checkout__success {
-  text-align: center;
-}
-
-.beat-checkout__success-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--c-ember);
-  color: var(--c-black);
-  font-size: 1.5rem;
-  margin-bottom: 14px;
-}
-
-.beat-checkout__code {
-  font-family: var(--font-mono);
-  font-size: 1.5rem;
-  letter-spacing: 0.1em;
-  background: var(--c-black);
-  border: 1px dashed var(--c-charcoal);
-  border-radius: var(--radius-sm);
-  padding: 16px;
-  margin: 18px 0;
-}
-
 .shop-link-muted {
   display: inline-block;
   margin-top: 28px;
