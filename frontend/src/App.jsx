@@ -33,7 +33,7 @@ import AdminSmackBeatWinners from "./pages/admin/AdminSmackBeatWinners";
 import AdminHelpWidget from "./pages/admin/AdminHelpWidget";
 import AdminBeats from "./pages/admin/AdminBeats";
 import AdminSales from "./pages/admin/AdminSales";
-import AdminShopSettings from "./pages/admin/AdminShopSettings";
+import AdminPaymentLogos from "./pages/admin/AdminPaymentLogos";
 
 // Le chemin de la page admin est configurable via VITE_ADMIN_PATH pour rester discret
 // et facile a changer sans toucher au code (ex: /backstage, /studio-stelair, etc.)
@@ -83,7 +83,7 @@ export default function App() {
           <Route path="bouton-aide" element={<AdminHelpWidget />} />
           <Route path="beats" element={<AdminBeats />} />
           <Route path="ventes" element={<AdminSales />} />
-          <Route path="boutique-reglages" element={<AdminShopSettings />} />
+          <Route path="boutique-reglages" element={<AdminPaymentLogos />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

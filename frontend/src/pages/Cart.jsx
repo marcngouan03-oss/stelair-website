@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import PaymentMethods from "../components/PaymentMethods";
 import "../styles/pages.css";
 import "../styles/forms.css";
 import "../styles/shop.css";
@@ -65,8 +66,12 @@ export default function Cart() {
             </div>
 
             <div className="checkout-payment">
-              <h2 className="checkout-payment__title">Paiement</h2>
-              <p className="beat-checkout__hint">Le paiement en ligne arrive bientôt.</p>
+              <h2 className="checkout-payment__title">Paiement securise par Stripe</h2>
+              <PaymentMethods style={{ marginBottom: 16 }} />
+              <button type="button" className="btn btn-primary checkout-cart-btn" disabled>
+                Payer {formatEUR(total)}
+              </button>
+              <p className="beat-checkout__hint">Le paiement par carte arrive tres bientot.</p>
             </div>
           </aside>
         </div>

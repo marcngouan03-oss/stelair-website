@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/api";
 import SocialIcon from "./SocialIcon";
+import PaymentMethods from "./PaymentMethods";
 import "../styles/layout.css";
 
 export default function Footer() {
@@ -43,12 +44,10 @@ export default function Footer() {
         <div className="footer__col">
           <h4>Paiement</h4>
           <div className="footer__payment">
-            <span>Paiement securise</span>
-            <img
-              src="https://www.paypalobjects.com/webstatic/icon/pp258.png"
-              alt="PayPal"
-              className="footer__payment-badge"
-            />
+            <span>Paiement securise par Stripe</span>
+          </div>
+          <div className="footer__payment">
+            <PaymentMethods />
           </div>
         </div>
 

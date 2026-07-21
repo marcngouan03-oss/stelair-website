@@ -41,7 +41,7 @@ export default function Shop() {
           <h2 className="section-title">Packs de sons</h2>
           <p className="section-lede">
             Chaque pack est un fichier ZIP telechargeable immediatement apres paiement,
-            paiement securise par PayPal.
+            paiement securise par Stripe.
           </p>
 
           {beats.length > 0 && (

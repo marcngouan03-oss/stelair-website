@@ -17,7 +17,7 @@ const links = [
   { to: "/demandes", label: "Demandes de collab" },
   { to: "/beats", label: "Boutique — Catalogue" },
   { to: "/ventes", label: "Boutique — Ventes" },
-  { to: "/boutique-reglages", label: "Boutique — Reglages" },
+  { to: "/boutique-reglages", label: "Boutique — Logos de paiement" },
   { to: "/smackbeat", label: "SmackBeat" },
   { to: "/smackbeat-gagnants", label: "SmackBeat — Gagnants" },
   { to: "/bouton-aide", label: "Bouton d'aide" },

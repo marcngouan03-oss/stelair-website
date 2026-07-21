@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import api from "../api/api";
 import { useCart } from "../context/CartContext";
+import PaymentMethods from "../components/PaymentMethods";
 import "../styles/pages.css";
 import "../styles/shop.css";
 
@@ -13,7 +14,7 @@ const PREVIEW_CAP_SECONDS = 20;
 
 // Page produit : presentation du pack (pochette, description, extrait audio,
 // ce qui est inclus) + un bouton "Ajouter au panier" qui envoie vers /panier,
-// ou le paiement (email + PayPal) a reellement lieu.
+// ou le paiement (email + Stripe) a reellement lieu.
 export default function BeatCheckout() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -95,7 +96,7 @@ export default function BeatCheckout() {
 
             <ul className="checkout-includes">
               <li>Fichier ZIP haute qualite, telechargement immediat apres paiement</li>
-              <li>Paiement securise par PayPal</li>
+              <li>Paiement securise par Stripe</li>
               <li>Achats retrouvables a tout moment avec votre code d&apos;acces</li>
             </ul>
           </div>
@@ -121,6 +122,7 @@ export default function BeatCheckout() {
             <button className="btn btn-primary checkout-cart-btn" onClick={handleAddToCart}>
               Ajouter au panier
             </button>
+            <PaymentMethods className="payment-methods--compact" style={{ marginTop: 14, justifyContent: "center" }} />
           </aside>
         </div>
       </div>
